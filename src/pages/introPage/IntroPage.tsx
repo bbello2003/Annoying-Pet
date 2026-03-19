@@ -26,13 +26,13 @@ import alert5 from "../../assets/introPage/alert-window-5.png";
 import alertError from "../../assets/introPage/alert-window-error.png";
 
 const ERROR_WINDOWS_CONFIG = [
-  { id: 1, src: alert1, top: "62.5%", left: "52.5%", width: "45vw" },
-  { id: 2, src: alert2, top: "46%", left: "2%", width: "37.5vw" },
-  { id: 3, src: alertError, top: "11.5%", left: "4%", width: "29vw" },
-  { id: 4, src: alert3, top: "61.5%", left: "14.3%", width: "33.2vw" },
-  { id: 5, src: alertError, top: "42.3%", left: "63.6%", width: "29vw" },
-  { id: 6, src: alert4, top: "5.4%", left: "52.5%", width: "43.5vw" },
-  { id: 7, src: alert5, top: "3.5%", left: "15%", width: "32.5vw" },
+  { id: 1, src: alert1, top: "62.5%", left: "52.5%", width: "45vw", btn: { t: "5%", r: "3.5%", s: "6%" } },
+  { id: 2, src: alert2, top: "46%", left: "2%", width: "37.5vw", btn: { t: "4.8%", r: "4.2%", s: "7%" } },
+  { id: 3, src: alertError, top: "11.5%", left: "4%", width: "29vw", btn: { t: "5%", r: "5%", s: "9%" } },
+  { id: 4, src: alert3, top: "61.5%", left: "14.3%", width: "33.2vw", btn: { t: "5%", r: "5%", s: "8%" } },
+  { id: 5, src: alertError, top: "42.3%", left: "63.6%", width: "29vw", btn: { t: "5.2%", r: "5%", s: "9%" } },
+  { id: 6, src: alert4, top: "5.4%", left: "52.5%", width: "43.5vw", btn: { t: "4.5%", r: "3.5%", s: "6%" } },
+  { id: 7, src: alert5, top: "3.5%", left: "15%", width: "32.5vw", btn: { t: "4%", r: "5%", s: "8%" } },
 ];
 
 const BACK_PETS = [
@@ -225,6 +225,13 @@ const IntroPage = () => {
                   <div
                     className="close-btn"
                     onClick={() => handleCloseOne(err.id)}
+                    style={{
+                      top: err.btn?.t,
+                      right: err.btn?.r,
+                      width: err.btn?.s,
+                      height: "auto",
+                      aspectRatio: "1 / 1"
+                    }}
                   />
                 </motion.div>
               );

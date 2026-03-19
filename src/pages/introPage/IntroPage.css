@@ -140,10 +140,6 @@
 
 .close-btn {
   position: absolute;
-  top: 5.8px;
-  right: 12px;
-  width: 19px;
-  height: 19px;
   cursor: pointer;
   background: transparent;
   z-index: 10;
