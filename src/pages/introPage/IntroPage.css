@@ -1,0 +1,121 @@
+.intro-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #33a681;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.intro-container::-webkit-scrollbar {
+  display: none;
+}
+
+.background-wrapper {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.full-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pets-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.back-layer {
+  z-index: 1;
+}
+
+.game-window-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 71%;
+  height: 50.7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.game-window-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.front-layer {
+  z-index: 3;
+}
+
+.pet-item {
+  position: absolute;
+  z-index: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.custom-scrollbar-wrapper {
+  position: fixed;
+  right: 6.5vh;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 86vh;
+  width: auto;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.scrollbar-track-container {
+  position: relative;
+  height: 100%;
+  width: fit-content;
+}
+
+.scroll-track-img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.scroll-thumb-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: top 0.1s linear; 
+  user-select: none; /* กันการคลุมดำรูป */
+  -webkit-user-drag: none;
+}
+
+.scroll-thumb-container:active {
+  transition: none;
+}
+
+.scroll-thumb-img {
+  width: auto;
+  cursor: grab;
+  object-fit: contain;
+  pointer-events: auto;
+  /* เพิ่ม 2 บรรทัดนี้ครับ */
+  user-select: none;
+  -webkit-user-drag: none;
+}
