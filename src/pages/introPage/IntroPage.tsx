@@ -1,14 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import "./IntroPage.css";
 
-// Assets Imports
 import introBg from "../../assets/introPage/intro-background.png";
 import introFirstWindow from "../../assets/introPage/intro-first-window.png";
 import scrollTrack from "../../assets/introPage/scrollbar.png";
 import scrollThumbIcon from "../../assets/introPage/scroll.png";
 
-// Pet Assets
 import hamsterDef from "../../assets/introPage/hamster-default.png";
 import hamsterAct from "../../assets/introPage/hamster-playing.png";
 import rabbitDef from "../../assets/introPage/rabbit-default.png";
@@ -19,6 +17,23 @@ import sugarDef from "../../assets/introPage/sugarGrider-default.png";
 import sugarAct from "../../assets/introPage/sugerGlider-food.png";
 import hedgeDef from "../../assets/introPage/hedgehog-default.png";
 import hedgeAct from "../../assets/introPage/headgehog-dirty.png";
+
+import alert1 from "../../assets/introPage/alert-window-1.png";
+import alert2 from "../../assets/introPage/alert-window-2.png";
+import alert3 from "../../assets/introPage/alert-window-3.png";
+import alert4 from "../../assets/introPage/alert-window-4.png";
+import alert5 from "../../assets/introPage/alert-window-5.png";
+import alertError from "../../assets/introPage/alert-window-error.png";
+
+const ERROR_WINDOWS_CONFIG = [
+  { id: 1, src: alert1, top: "62.5%", left: "52.5%", width: "45vw" },
+  { id: 2, src: alert2, top: "46%", left: "2%", width: "37.5vw" },
+  { id: 3, src: alertError, top: "11.5%", left: "4%", width: "29vw" },
+  { id: 4, src: alert3, top: "61.5%", left: "14.3%", width: "33.2vw" },
+  { id: 5, src: alertError, top: "42.3%", left: "63.6%", width: "29vw" },
+  { id: 6, src: alert4, top: "5.4%", left: "52.5%", width: "43.5vw" },
+  { id: 7, src: alert5, top: "3.5%", left: "15%", width: "32.5vw" },
+];
 
 const BACK_PETS = [
   {
@@ -71,6 +86,11 @@ const IntroPage = () => {
   const [hoveredPet, setHoveredPet] = useState<string | null>(null);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+
+  const [isLocked, setIsLocked] = useState(false);
+  const [activeErrorIndex, setActiveErrorIndex] = useState(-1);
+  const [closedIds, setClosedIds] = useState<number[]>([]);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -78,53 +98,69 @@ const IntroPage = () => {
   const ARROW_OFFSET_VH = 4.5;
 
   const handleScroll = useCallback(() => {
+    if (isLocked) return;
     if (containerRef.current && !isDragging) {
       const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
       const totalScrollable = scrollHeight - clientHeight;
-      setScrollPercent(totalScrollable > 0 ? scrollTop / totalScrollable : 0);
+      const currentPercent =
+        totalScrollable > 0 ? scrollTop / totalScrollable : 0;
+      setScrollPercent(currentPercent);
+      if (currentPercent >= 0.99) {
+        setScrollPercent(1);
+        setIsLocked(true);
+      }
     }
-  }, [isDragging]);
+  }, [isDragging, isLocked]);
+
+  useEffect(() => {
+    if (isLocked && activeErrorIndex < ERROR_WINDOWS_CONFIG.length - 1) {
+      const timer = setTimeout(() => {
+        setActiveErrorIndex((prev) => prev + 1);
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [isLocked, activeErrorIndex]);
+
+  const handleCloseOne = (id: number) => {
+    setClosedIds((prev) => [...prev, id]);
+  };
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (isLocked) return;
     e.preventDefault();
     setIsDragging(true);
   };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging || !trackRef.current || !containerRef.current) return;
-
+      if (isLocked || !isDragging || !trackRef.current || !containerRef.current)
+        return;
       const trackRect = trackRef.current.getBoundingClientRect();
-      // คำนวณหาตำแหน่งเมาส์เทียบกับความสูงราง (หักลบ Offset ลูกศรออก)
-      const trackHeight = trackRect.height;
       const arrowPx = (ARROW_OFFSET_VH / 100) * window.innerHeight;
       const thumbPx = (THUMB_HEIGHT_VH / 100) * window.innerHeight;
-      
-      let relativeY = e.clientY - trackRect.top - arrowPx - (thumbPx / 2);
-      const availableTrack = trackHeight - (arrowPx * 2) - thumbPx;
-
-      // จำกัดขอบเขตไม่ให้ลากเลยราง
+      const availableTrack = trackRect.height - arrowPx * 2 - thumbPx;
+      let relativeY = e.clientY - trackRect.top - arrowPx - thumbPx / 2;
       relativeY = Math.max(0, Math.min(relativeY, availableTrack));
       const newRatio = relativeY / availableTrack;
-
-      // อัปเดต Scroll ของ Container จริง
-      const totalScrollable = containerRef.current.scrollHeight - containerRef.current.clientHeight;
-      containerRef.current.scrollTop = newRatio * totalScrollable;
+      containerRef.current.scrollTop =
+        newRatio *
+        (containerRef.current.scrollHeight - containerRef.current.clientHeight);
       setScrollPercent(newRatio);
+      if (newRatio >= 0.99) {
+        setIsLocked(true);
+        setIsDragging(false);
+      }
     };
-
     const handleMouseUp = () => setIsDragging(false);
-
     if (isDragging) {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
     }
-
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, isLocked]);
 
   const renderPet = (pet: any) => (
     <div
@@ -147,7 +183,11 @@ const IntroPage = () => {
   );
 
   return (
-    <div className="intro-container" ref={containerRef} onScroll={handleScroll}>
+    <div
+      className={`intro-container ${isLocked ? "locked" : ""}`}
+      ref={containerRef}
+      onScroll={handleScroll}
+    >
       <div className="background-wrapper">
         <img src={introBg} className="full-bg" alt="background" />
         <div className="pets-layer back-layer">{BACK_PETS.map(renderPet)}</div>
@@ -163,17 +203,45 @@ const IntroPage = () => {
         </div>
       </div>
 
+      <AnimatePresence>
+        {isLocked &&
+          ERROR_WINDOWS_CONFIG.map((err, index) => {
+            if (index <= activeErrorIndex && !closedIds.includes(err.id)) {
+              return (
+                <motion.div
+                  key={err.id}
+                  className="error-window-item"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  style={{
+                    top: err.top,
+                    left: err.left,
+                    width: err.width,
+                    zIndex: 100 + index,
+                  }}
+                >
+                  <img src={err.src} className="error-img" alt="Error" />
+                  <div
+                    className="close-btn"
+                    onClick={() => handleCloseOne(err.id)}
+                  />
+                </motion.div>
+              );
+            }
+            return null;
+          })}
+      </AnimatePresence>
+
       <div className="custom-scrollbar-wrapper">
-        {/* --- เพิ่ม ref={trackRef} ตรงบรรทัดนี้ --- */}
         <div className="scrollbar-track-container" ref={trackRef}>
           <img src={scrollTrack} className="scroll-track-img" alt="track" />
-          
           <motion.div
             className="scroll-thumb-container"
             onMouseDown={handleMouseDown}
             style={{
               top: `calc(${ARROW_OFFSET_VH}vh + (${scrollPercent} * (100% - ${THUMB_HEIGHT_VH + ARROW_OFFSET_VH * 2}vh)))`,
-              cursor: isDragging ? "grabbing" : "grab",
+              cursor: isLocked ? "default" : isDragging ? "grabbing" : "grab",
             }}
           >
             <img
