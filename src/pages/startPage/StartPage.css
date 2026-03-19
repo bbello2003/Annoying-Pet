@@ -1,0 +1,20 @@
+.start-page-wrapper {
+  /* บังคับเต็มหน้าจอ */
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  /* จัดการรูปพื้นหลัง */
+  background-size: cover;      /* ขยายรูปให้คลุมพื้นที่ทั้งหมด */
+  background-position: center; /* จัดรูปให้อยู่กึ่งกลางเสมอ */
+  background-repeat: no-repeat;
+  
+  /* ป้องกันการ Scroll ในหน้านี้ */
+  overflow: hidden;
+
+  /* --- แก้ไขจุดนี้ --- */
+  /* เอา z-index: 9999 ออก เพื่อให้ค่า z-index ใน IntroPage เป็นตัวกำหนดลำดับแทน */
+  z-index: auto; 
+}
