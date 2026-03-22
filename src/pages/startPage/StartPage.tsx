@@ -4,7 +4,7 @@ import "./StartPage.css";
 
 // Import Assets
 import startBg from "../../assets/startPage/start-background.png";
-import nextArrow from "../../assets/startPage/next-arrow.png";
+import nextArrow from "../../assets/components/next-arrow.png";
 import poleImg from "../../assets/startPage/pole.png";
 import houseImg from "../../assets/startPage/house.png";
 
@@ -13,6 +13,8 @@ import medicalSign from "../../assets/startPage/medical-sign.png";
 import foodSign from "../../assets/startPage/food-sign.png";
 import equipSign from "../../assets/startPage/equipment-sign.png";
 import othersSign from "../../assets/startPage/others-sign.png";
+import exploreSignPole from "../../assets/startPage/explore-house-sign.png";
+import exploreSign from "../../assets/startPage/explore-sign.png";
 
 // Import Window Images
 import medicalWin from "../../assets/startPage/medical-window.png";
@@ -22,6 +24,7 @@ import othersWin from "../../assets/startPage/others-window.png";
 
 const StartPage = () => {
   const [isHouseMode, setIsHouseMode] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
   const [showMedical, setShowMedical] = useState(false);
   const [showFood, setShowFood] = useState(false);
   const [showEquip, setShowEquip] = useState(false);
@@ -35,15 +38,34 @@ const StartPage = () => {
     setIsHouseMode(true);
   };
 
+  const handleHouseClick = () => {
+    if (isHouseMode && !isZoomed) {
+      setIsZoomed(true);
+    }
+  };
+
   return (
     <div className="start-page-container">
-      <div className="start-page-wrapper">
+      <motion.div
+        className="game-scene-context"
+        style={{
+          originX: "97%",
+          originY: "53%",
+        }}
+        animate={{
+          scale: isZoomed ? 1.6 : 1,
+        }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
         <img src={startBg} alt="Background" className="bg-img-base" />
 
         <motion.div
           className="signpost-container"
-          animate={{ x: isHouseMode ? "-26vw" : 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          animate={{ x: isHouseMode ? (isZoomed ? "-150vw" : "-26vw") : 0 }}
+          transition={{
+            duration: isZoomed ? 1.5 : 0.6,
+            ease: "easeInOut",
+          }}
         >
           <img src={poleImg} alt="Pole" className="sign-pole" />
           <SignItem
@@ -75,65 +97,119 @@ const StartPage = () => {
         <motion.div
           className="house-layer"
           initial={{ x: "100vw" }}
-          animate={{
-            x: isHouseMode ? 0 : "100vw",
-          }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          animate={{ x: isHouseMode ? 0 : "100vw" }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <img src={houseImg} alt="House" className="house-asset-img" />
+          <motion.img
+            src={houseImg}
+            alt="House"
+            className="house-asset-img"
+            onClick={handleHouseClick}
+            whileHover={
+              isHouseMode && !isZoomed
+                ? {
+                    scale: 1.02,
+                    transition: { type: "spring", stiffness: 400, damping: 20 },
+                  }
+                : {}
+            }
+            whileTap={isHouseMode && !isZoomed ? { scale: 1 } : {}}
+            style={{
+              cursor: isHouseMode && !isZoomed ? "pointer" : "default",
+              pointerEvents: "auto",
+            }}
+          />
         </motion.div>
+      </motion.div>
 
-        <AnimatePresence>
-          {!isHouseMode && (
-            <motion.img
-              key="next-btn"
-              src={nextArrow}
-              className="next-btn-absolute"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              onClick={handleNextPage}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 1 }}
-            />
-          )}
-        </AnimatePresence>
+      <motion.div
+        className="explore-sign-container"
+        initial={{ x: "100vw" }}
+        animate={{ x: isZoomed ? "0vw" : "100vw" }}
+        transition={{ duration: 0.6, delay: 0, ease: "easeOut" }}
+        style={{
+          position: "absolute",
+          bottom: "5.5%",
+          right: "4%",
+          zIndex: 1100,
+          width: "18%",
+        }}
+      >
+        <img
+          src={exploreSignPole}
+          alt="pole"
+          style={{ width: "100%", display: "block" }}
+        />
 
-        <AnimatePresence>
-          {showMedical && (
-            <WindowItem
-              key="medical"
-              img={medicalWin}
-              onClose={() => setShowMedical(false)}
-              id="medical"
-            />
-          )}
-          {showFood && (
-            <WindowItem
-              key="food"
-              img={foodWin}
-              onClose={() => setShowFood(false)}
-              id="food"
-            />
-          )}
-          {showEquip && (
-            <WindowItem
-              key="equip"
-              img={equipWin}
-              onClose={() => setShowEquip(false)}
-              id="equip"
-            />
-          )}
-          {showOthers && (
-            <WindowItem
-              key="others"
-              img={othersWin}
-              onClose={() => setShowOthers(false)}
-              id="others"
-            />
-          )}
-        </AnimatePresence>
-      </div>
+        <motion.img
+          src={exploreSign}
+          alt="explore sign"
+          style={{
+            position: "absolute",
+            top: 25,
+            left: 0,
+            width: "100%",
+            cursor: "pointer",
+          }}
+          whileHover={{
+            scale: 1.05,
+            transition: { type: "spring", stiffness: 400, damping: 20 },
+          }}
+          whileTap={{ scale: 1 }}
+          onClick={() => console.log("ไปหน้าถัดไป")}
+        />
+      </motion.div>
+
+      <AnimatePresence>
+        {!isHouseMode && (
+          <motion.img
+            key="next-btn"
+            src={nextArrow}
+            className="next-btn-absolute"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={handleNextPage}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 1 }}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showMedical && (
+          <WindowItem
+            key="medical"
+            img={medicalWin}
+            onClose={() => setShowMedical(false)}
+            id="medical"
+          />
+        )}
+        {showFood && (
+          <WindowItem
+            key="food"
+            img={foodWin}
+            onClose={() => setShowFood(false)}
+            id="food"
+          />
+        )}
+        {showEquip && (
+          <WindowItem
+            key="equip"
+            img={equipWin}
+            onClose={() => setShowEquip(false)}
+            id="equip"
+          />
+        )}
+        {showOthers && (
+          <WindowItem
+            key="others"
+            img={othersWin}
+            onClose={() => setShowOthers(false)}
+            id="others"
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
