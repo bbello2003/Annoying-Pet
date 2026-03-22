@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./StartPage.css";
+import LobbyPage from "../lobbyPage/LobbyPage";
 
 // Import Assets
 import startBg from "../../assets/startPage/start-background.png";
@@ -23,6 +24,7 @@ import equipWin from "../../assets/startPage/equipment-window.png";
 import othersWin from "../../assets/startPage/others-window.png";
 
 const StartPage = () => {
+  const [isLobbyMode, setIsLobbyMode] = useState(false);
   const [isHouseMode, setIsHouseMode] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [showMedical, setShowMedical] = useState(false);
@@ -45,169 +47,205 @@ const StartPage = () => {
   };
 
   return (
-    <div className="start-page-container">
-      <motion.div
-        className="game-scene-context"
-        style={{
-          originX: "97%",
-          originY: "53%",
-        }}
-        animate={{
-          scale: isZoomed ? 1.6 : 1,
-        }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      >
-        <img src={startBg} alt="Background" className="bg-img-base" />
-
-        <motion.div
-          className="signpost-container"
-          animate={{ x: isHouseMode ? (isZoomed ? "-150vw" : "-26vw") : 0 }}
-          transition={{
-            duration: isZoomed ? 1.5 : 0.6,
-            ease: "easeInOut",
-          }}
-        >
-          <img src={poleImg} alt="Pole" className="sign-pole" />
-          <SignItem
-            img={medicalSign}
-            className="sign-medical"
-            isHouseMode={isHouseMode}
-            onClick={() => !isHouseMode && setShowMedical(true)}
-          />
-          <SignItem
-            img={foodSign}
-            className="sign-food"
-            isHouseMode={isHouseMode}
-            onClick={() => !isHouseMode && setShowFood(true)}
-          />
-          <SignItem
-            img={equipSign}
-            className="sign-equip"
-            isHouseMode={isHouseMode}
-            onClick={() => !isHouseMode && setShowEquip(true)}
-          />
-          <SignItem
-            img={othersSign}
-            className="sign-others"
-            isHouseMode={isHouseMode}
-            onClick={() => !isHouseMode && setShowOthers(true)}
-          />
-        </motion.div>
-
-        <motion.div
-          className="house-layer"
-          initial={{ x: "100vw" }}
-          animate={{ x: isHouseMode ? 0 : "100vw" }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-        >
-          <motion.img
-            src={houseImg}
-            alt="House"
-            className="house-asset-img"
-            onClick={handleHouseClick}
-            whileHover={
-              isHouseMode && !isZoomed
-                ? {
-                    scale: 1.02,
-                    transition: { type: "spring", stiffness: 400, damping: 20 },
-                  }
-                : {}
-            }
-            whileTap={isHouseMode && !isZoomed ? { scale: 1 } : {}}
-            style={{
-              cursor: isHouseMode && !isZoomed ? "pointer" : "default",
-              pointerEvents: "auto",
-            }}
-          />
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        className="explore-sign-container"
-        initial={{ x: "100vw" }}
-        animate={{ x: isZoomed ? "0vw" : "100vw" }}
-        transition={{ duration: 0.6, delay: 0, ease: "easeOut" }}
-        style={{
-          position: "absolute",
-          bottom: "5.5%",
-          right: "4%",
-          zIndex: 1100,
-          width: "18%",
-        }}
-      >
-        <img
-          src={exploreSignPole}
-          alt="pole"
-          style={{ width: "100%", display: "block" }}
-        />
-
-        <motion.img
-          src={exploreSign}
-          alt="explore sign"
-          style={{
-            position: "absolute",
-            top: 25,
-            left: 0,
-            width: "100%",
-            cursor: "pointer",
-          }}
-          whileHover={{
-            scale: 1.05,
-            transition: { type: "spring", stiffness: 400, damping: 20 },
-          }}
-          whileTap={{ scale: 1 }}
-          onClick={() => console.log("ไปหน้าถัดไป")}
-        />
-      </motion.div>
+    <div
+      style={{
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        backgroundColor: "#33a681",
+      }}
+    >
+      <div style={{ position: "fixed", inset: 0, zIndex: 1 }}>
+        <LobbyPage />
+      </div>
 
       <AnimatePresence>
-        {!isHouseMode && (
-          <motion.img
-            key="next-btn"
-            src={nextArrow}
-            className="next-btn-absolute"
+        {!isLobbyMode && (
+          <motion.div
+            key="start-page-content"
+            className="start-page-container"
             initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            onClick={handleNextPage}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 1 }}
-          />
-        )}
-      </AnimatePresence>
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            style={{
+              position: "relative",
+              zIndex: 2,
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <motion.div
+              className="game-scene-context"
+              style={{
+                originX: "97%",
+                originY: "53%",
+              }}
+              animate={{
+                scale: isZoomed ? 1.6 : 1,
+              }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <img src={startBg} alt="Background" className="bg-img-base" />
 
-      <AnimatePresence>
-        {showMedical && (
-          <WindowItem
-            key="medical"
-            img={medicalWin}
-            onClose={() => setShowMedical(false)}
-            id="medical"
-          />
-        )}
-        {showFood && (
-          <WindowItem
-            key="food"
-            img={foodWin}
-            onClose={() => setShowFood(false)}
-            id="food"
-          />
-        )}
-        {showEquip && (
-          <WindowItem
-            key="equip"
-            img={equipWin}
-            onClose={() => setShowEquip(false)}
-            id="equip"
-          />
-        )}
-        {showOthers && (
-          <WindowItem
-            key="others"
-            img={othersWin}
-            onClose={() => setShowOthers(false)}
-            id="others"
-          />
+              <motion.div
+                className="signpost-container"
+                animate={{
+                  x: isHouseMode ? (isZoomed ? "-150vw" : "-26vw") : 0,
+                }}
+                transition={{
+                  duration: isZoomed ? 1.5 : 0.6,
+                  ease: "easeInOut",
+                }}
+              >
+                <img src={poleImg} alt="Pole" className="sign-pole" />
+                <SignItem
+                  img={medicalSign}
+                  className="sign-medical"
+                  isHouseMode={isHouseMode}
+                  onClick={() => !isHouseMode && setShowMedical(true)}
+                />
+                <SignItem
+                  img={foodSign}
+                  className="sign-food"
+                  isHouseMode={isHouseMode}
+                  onClick={() => !isHouseMode && setShowFood(true)}
+                />
+                <SignItem
+                  img={equipSign}
+                  className="sign-equip"
+                  isHouseMode={isHouseMode}
+                  onClick={() => !isHouseMode && setShowEquip(true)}
+                />
+                <SignItem
+                  img={othersSign}
+                  className="sign-others"
+                  isHouseMode={isHouseMode}
+                  onClick={() => !isHouseMode && setShowOthers(true)}
+                />
+              </motion.div>
+
+              <motion.div
+                className="house-layer"
+                initial={{ x: "100vw" }}
+                animate={{ x: isHouseMode ? 0 : "100vw" }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
+                <motion.img
+                  src={houseImg}
+                  alt="House"
+                  className="house-asset-img"
+                  onClick={handleHouseClick}
+                  whileHover={
+                    isHouseMode && !isZoomed
+                      ? {
+                          scale: 1.02,
+                          transition: {
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 20,
+                          },
+                        }
+                      : {}
+                  }
+                  whileTap={isHouseMode && !isZoomed ? { scale: 1 } : {}}
+                  style={{
+                    cursor: isHouseMode && !isZoomed ? "pointer" : "default",
+                    pointerEvents: "auto",
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="explore-sign-container"
+              initial={{ x: "100vw" }}
+              animate={{ x: isZoomed ? "0vw" : "100vw" }}
+              transition={{ duration: 0.6, delay: 0, ease: "easeOut" }}
+              style={{
+                position: "absolute",
+                bottom: "5.5%",
+                right: "4%",
+                zIndex: 1100,
+                width: "18%",
+              }}
+            >
+              <img
+                src={exploreSignPole}
+                alt="pole"
+                style={{ width: "100%", display: "block" }}
+              />
+
+              <motion.img
+                src={exploreSign}
+                alt="explore sign"
+                style={{
+                  position: "absolute",
+                  top: 25,
+                  left: 0,
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { type: "spring", stiffness: 400, damping: 20 },
+                }}
+                whileTap={{ scale: 1 }}
+                onClick={() => setIsLobbyMode(true)}
+              />
+            </motion.div>
+
+            <AnimatePresence>
+              {!isHouseMode && (
+                <motion.img
+                  key="next-btn"
+                  src={nextArrow}
+                  className="next-btn-absolute"
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  onClick={handleNextPage}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 1 }}
+                />
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {showMedical && (
+                <WindowItem
+                  key="medical"
+                  img={medicalWin}
+                  onClose={() => setShowMedical(false)}
+                  id="medical"
+                />
+              )}
+              {showFood && (
+                <WindowItem
+                  key="food"
+                  img={foodWin}
+                  onClose={() => setShowFood(false)}
+                  id="food"
+                />
+              )}
+              {showEquip && (
+                <WindowItem
+                  key="equip"
+                  img={equipWin}
+                  onClose={() => setShowEquip(false)}
+                  id="equip"
+                />
+              )}
+              {showOthers && (
+                <WindowItem
+                  key="others"
+                  img={othersWin}
+                  onClose={() => setShowOthers(false)}
+                  id="others"
+                />
+              )}
+            </AnimatePresence>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
