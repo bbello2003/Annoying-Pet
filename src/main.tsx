@@ -20,13 +20,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/start" element={<StartPage />} />
-        <Route path="/lobby" element={<LobbyPage />} />
-        <Route path="/room/sugar" element={<SugarGliderRoom />} />
-        <Route path="/room/rabbit" element={<RabbitRoom />} />
-        <Route path="/room/hamster" element={<HamsterRoom />} />
-        <Route path="/room/squirrel" element={<SquirrelRoom />} />
-        <Route path="/room/hedgehog" element={<HedgehogRoom />} />
-        <Route path="/room/secret" element={<SecretRoom />} />
+        <Route path="/lobby" element={<LobbyPage />}>
+          <Route path="sugar" element={<SugarGliderRoom />} />
+          <Route path="rabbit" element={<RabbitRoom />} />
+          <Route path="hamster" element={<HamsterRoom />} />
+          <Route path="squirrel" element={<SquirrelRoom />} />
+          <Route path="hedgehog" element={<HedgehogRoom />} />
+          <Route path="secret" element={<SecretRoom />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

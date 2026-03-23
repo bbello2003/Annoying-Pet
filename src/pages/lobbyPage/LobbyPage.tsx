@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import "./LobbyPage.css";
 
 // Import Assets
@@ -75,11 +75,16 @@ const LobbyPage = () => {
   const navigate = useNavigate();
 
   const handleRoomClick = (id: string) => {
-    navigate(`/room/${id}`); 
+    navigate(`/lobby/${id}`);
   };
 
   return (
-    <div className={`lobby-page-container ${hoveredRoom ? "is-hovering" : ""}`}>
+    <motion.div
+      className={`lobby-page-container ${hoveredRoom ? "is-hovering" : ""}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="lobby-wrapper">
         <img src={lobbyBg} className="full-bg" alt="Lobby Background" />
         <img src={exploreTopic} className="lobby-header" alt="Header Title" />
@@ -108,7 +113,9 @@ const LobbyPage = () => {
           </div>
         ))}
       </div>
-    </div>
+
+      <Outlet />
+    </motion.div>
   );
 };
 
