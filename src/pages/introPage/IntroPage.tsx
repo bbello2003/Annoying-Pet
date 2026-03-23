@@ -14,8 +14,8 @@ import rabbitDef from "../../assets/introPage/rabbit-default.png";
 import rabbitAct from "../../assets/introPage/rabbit-sick.png";
 import squirrelDef from "../../assets/introPage/squirrel-default.png";
 import squirrelAct from "../../assets/introPage/squirrel-exercise.png";
-import sugarDef from "../../assets/introPage/sugarGrider-default.png";
-import sugarAct from "../../assets/introPage/sugerGlider-food.png";
+import sugarDef from "../../assets/introPage/sugarGlider-default.png";
+import sugarAct from "../../assets/introPage/sugarGlider-food.png";
 import hedgeDef from "../../assets/introPage/hedgehog-default.png";
 import hedgeAct from "../../assets/introPage/headgehog-dirty.png";
 

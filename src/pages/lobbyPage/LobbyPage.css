@@ -2,17 +2,64 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-color: #33a681;
+  background-color: #4bac7c;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
-.lobby-bg {
+.lobby-page-container.is-hovering {
+  background-color: #2a6748;
+}
+
+.lobby-wrapper {
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+}
+
+.full-bg {
+  width: 100%;
+  height: auto;
   display: block;
+  transition: filter 0.3s ease;
+}
+
+.is-hovering .full-bg {
+  filter: brightness(0.6);
+}
+
+.lobby-header {
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  top: 11.8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35.4%;
+  z-index: 50;
+  pointer-events: none;
+  filter: brightness(1) !important;
+}
+
+.room-item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  transition: filter 0.3s ease;
+}
+
+.room-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+.is-hovering .room-item:not(:hover) {
+  filter: brightness(0.6);
+  z-index: 5;
+}
+
+.room-item:hover {
+  filter: brightness(1) !important;
+  z-index: 20;
 }
