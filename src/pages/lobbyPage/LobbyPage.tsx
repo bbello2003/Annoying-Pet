@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import "./LobbyPage.css";
 
 // Import Assets
@@ -71,12 +72,16 @@ const ROOMS_CONFIG = [
 
 const LobbyPage = () => {
   const [hoveredRoom, setHoveredRoom] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleRoomClick = (id: string) => {
+    navigate(`/room/${id}`); 
+  };
 
   return (
     <div className={`lobby-page-container ${hoveredRoom ? "is-hovering" : ""}`}>
       <div className="lobby-wrapper">
         <img src={lobbyBg} className="full-bg" alt="Lobby Background" />
-
         <img src={exploreTopic} className="lobby-header" alt="Header Title" />
 
         {ROOMS_CONFIG.map((room) => (
@@ -90,6 +95,7 @@ const LobbyPage = () => {
             }}
             onMouseEnter={() => setHoveredRoom(room.id)}
             onMouseLeave={() => setHoveredRoom(null)}
+            onClick={() => handleRoomClick(room.id)}
           >
             <motion.img
               src={hoveredRoom === room.id ? room.act : room.def}
