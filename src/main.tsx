@@ -7,6 +7,7 @@ import StartPage from "./pages/startPage/StartPage";
 import LobbyPage from "./pages/lobbyPage/LobbyPage";
 import SugarGliderRoom from "./pages/sugarGliderRoom/SugarGliderRoom";
 import SugarGliderFood from "./pages/sugarGliderRoom/SugarGliderFood";
+import SugarGliderDining from "./pages/sugarGliderRoom/SugarGliderDining";
 import HamsterRoom from "./pages/hamsterRoom/HamsterRoom";
 import HedgehogRoom from "./pages/hedgehogRoom/HedgehogRoom";
 import RabbitRoom from "./pages/rabbitRoom/RabbitRoom";
@@ -22,8 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<IntroPage />} />
         <Route path="/start" element={<StartPage />} />
         <Route path="/lobby" element={<LobbyPage />}>
-          <Route path="sugar" element={<SugarGliderRoom />} />
-          <Route path="sugar/food" element={<SugarGliderFood />} />
+          <Route path="sugar" element={<SugarGliderRoom />}>
+            <Route path="food" element={<SugarGliderFood />}>
+              <Route path="dining" element={<SugarGliderDining />}></Route>
+            </Route>
+          </Route>
           <Route path="rabbit" element={<RabbitRoom />} />
           <Route path="hamster" element={<HamsterRoom />} />
           <Route path="squirrel" element={<SquirrelRoom />} />

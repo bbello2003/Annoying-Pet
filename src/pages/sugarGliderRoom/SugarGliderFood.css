@@ -1,41 +1,100 @@
-.food-overlay {
+.food-overlay-page {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8); /* มืดกว่าเดิมเพื่อให้เห็นของในตู้เย็นชัดๆ */
-  z-index: 10000; /* อยู่หน้าสุดทับ SugarGliderRoom */
+  background-color: #bb9452 !important;
+  z-index: 99999;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  overflow: hidden;
 }
 
 .food-wrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-width: 100vw;
+  margin: 0 auto;
 }
 
-.fridge-open-bg {
+.fridge-open-full-bg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.food-selection-area {
+.home-btn {
   position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+  top: 1.7%;
+  left: 1.3%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 1.9vw;
+  z-index: 110;
 }
 
-.close-fridge-btn {
+.home-btn img {
+  width: 100%;
+  height: auto;
+}
+
+/* --- Refrigerator Side --- */
+.fridge-shelf-area {
   position: absolute;
-  top: 5%;
-  right: 5%;
-  padding: 10px 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.food-slot-absolute {
   cursor: pointer;
+  pointer-events: auto;
+}
+
+.food-slot-absolute.is-selected {
+  filter: grayscale(0.5) opacity(0.5);
+}
+
+/* --- Plate Side --- */
+.plate-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.food-on-plate {
+  position: absolute;
+  width: 12vw;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.food-on-plate img {
+  width: 100%;
+  height: auto;
+}
+
+/* --- Serve Button --- */
+.serve-food-btn {
+  position: absolute;
+  bottom: 2%;
+  right: 4.5%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 7vw;
+  z-index: 100;
+}
+
+.serve-food-btn img {
+  width: 100%;
+  height: auto;
 }

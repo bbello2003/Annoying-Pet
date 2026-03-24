@@ -199,7 +199,7 @@
   left: 4%;
   transform: translateX(-50%);
   width: 15.5vw;
-  z-index: 15;
+  z-index: 115;
   pointer-events: none;
 }
 
