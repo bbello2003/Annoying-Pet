@@ -1,19 +1,17 @@
-/* คลุมเต็มหน้าจอเบราว์เซอร์ */
 .stat-overlay-page {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #bb9452 !important; /* สีเดียวกับหน้าอื่นเพื่อความเนียน */
-  z-index: 100002; /* ต้องสูงกว่าหน้า Dining (100001) */
+  background-color: #bb9452 !important;
+  z-index: 100002;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
 }
 
-/* กรอบสัดส่วน 16:9 */
 .stat-wrapper {
   position: relative;
   width: 100%;
@@ -21,11 +19,131 @@
   margin: 0 auto;
 }
 
-/* ภาพพื้นหลังสถิติ */
 .stat-full-bg {
   width: 100%;
   height: 100%;
   display: block;
-  /* มั่นใจว่าภาพจะแปะเต็มกรอบ 16:9 และชิดขอบบน */
-  object-fit: fill; 
+  object-fit: fill;
+}
+
+.home-btn {
+  position: absolute;
+  top: 1.7%;
+  left: 1.3%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 1.9vw;
+  z-index: 100010;
+  padding: 0;
+}
+
+.home-btn img {
+  width: 100%;
+  display: block;
+}
+
+.window-container {
+  position: absolute;
+  top: 61.7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 76.9%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  z-index: 999;
+}
+
+.stat-window-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tab-group {
+  position: absolute;
+  top: 0;
+  width: 34.3%;
+  height: 10%;
+  display: flex;
+  right: 20%;
+  z-index: 1001;
+}
+
+.tab-hitbox {
+  flex: 1;
+  cursor: pointer;
+}
+
+.food-age-btn {
+  position: absolute;
+  bottom: 2.8%;
+  right: 4.5%;
+  width: 6.7vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.food-age-btn img {
+  width: 100%;
+  display: block;
+}
+
+.food-age-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100005;
+  background-color: #bb9452;
+}
+
+.food-age-full-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.explore-btn {
+  position: absolute;
+  bottom: 25.9%;
+  right: 42.5%;
+  width: 14.9vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 100006;
+  padding: 0;
+}
+
+.explore-btn img {
+  width: 100%;
+  display: block;
+}
+
+.food-age-window-container {
+  position: absolute;
+  top: 40%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  z-index: 100007;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder-window {
+  color: white;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 20px;
+  text-align: center;
 }

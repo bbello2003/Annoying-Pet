@@ -308,7 +308,7 @@ const SugarGliderDining = () => {
           className="home-btn"
           onClick={() => navigate("/lobby")}
           whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileTap={{ scale: 1 }}
         >
           <img src={homeIcon} alt="Home" />
         </motion.button>
