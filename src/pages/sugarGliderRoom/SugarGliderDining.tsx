@@ -133,7 +133,7 @@ const SugarGliderDining = () => {
     if (phase === "angry") {
       const timer2 = setTimeout(() => {
         setPhase("gameOver");
-      }, 1200);
+      }, 1800);
       return () => clearTimeout(timer2);
     }
   }, [phase, selectedFoods.length]);
