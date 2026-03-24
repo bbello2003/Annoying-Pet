@@ -1,0 +1,41 @@
+.food-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* มืดกว่าเดิมเพื่อให้เห็นของในตู้เย็นชัดๆ */
+  z-index: 10000; /* อยู่หน้าสุดทับ SugarGliderRoom */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.food-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-width: 100vw;
+}
+
+.fridge-open-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.food-selection-area {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.close-fridge-btn {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  padding: 10px 20px;
+  cursor: pointer;
+}

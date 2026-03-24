@@ -79,12 +79,7 @@ const LobbyPage = () => {
   };
 
   return (
-    <motion.div
-      className={`lobby-page-container ${hoveredRoom ? "is-hovering" : ""}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className={`lobby-page-container ${hoveredRoom ? "is-hovering" : ""}`}>
       <div className="lobby-wrapper">
         <img src={lobbyBg} className="full-bg" alt="Lobby Background" />
         <img src={exploreTopic} className="lobby-header" alt="Header Title" />
@@ -115,7 +110,7 @@ const LobbyPage = () => {
       </div>
 
       <Outlet />
-    </motion.div>
+    </div>
   );
 };
 
