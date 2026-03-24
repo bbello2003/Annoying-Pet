@@ -74,7 +74,7 @@ const SugarGliderFood = () => {
       fridgeStyle: { width: "12.5vw", top: "26.4%", left: "36.7%" },
       plateStyle: [
         { width: "16vw", top: "45%", left: "60%" },
-        { width: "12.5vw", top: "67%", left: "55%" },
+        { width: "12.5vw", top: "66%", left: "55%" },
         { width: "14vw", top: "68%", left: "65%" },
       ],
     },
@@ -85,7 +85,7 @@ const SugarGliderFood = () => {
       plateStyle: [
         { width: "17vw", top: "45%", left: "60%" },
         { width: "10.9vw", top: "68%", left: "55%" },
-        { width: "12vw", top: "70%", left: "67.5%" },
+        { width: "14vw", top: "68.5%", left: "65.5%" },
       ],
     },
     {
