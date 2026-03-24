@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./SugarGliderFood.css";
 
@@ -45,7 +45,16 @@ interface PlateStyle {
 
 const SugarGliderFood = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedFoodIds, setSelectedFoodIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (location.state?.selectedFoods && location.state.selectedFoods.length === 0) {
+      setSelectedFoodIds([]);
+      
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   const foodItems: FoodItem[] = [
     {

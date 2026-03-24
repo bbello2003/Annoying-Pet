@@ -5,8 +5,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #bb9452 !important;
-  /* z-index ต้องสูงกว่า food-overlay-page (99999) */
-  z-index: 100001; 
+  z-index: 100001;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -22,42 +21,9 @@
 
 .dining-full-bg {
   width: 100%;
-  height: auto;
-  display: block;
+  z-index: 1;
 }
 
-.table-items-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.finish-dining-btn {
-  position: absolute;
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 35px;
-  background: #8b5e3c;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 1.2vw;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 5px #5d3f28;
-  z-index: 10;
-}
-
-.finish-dining-btn:active {
-  transform: translateX(-50%) translateY(3px);
-  box-shadow: 0 2px #5d3f28;
-}
-
-/* ใช้คลาส home-btn เดิมเพื่อให้ตำแหน่งเป๊ะ */
 .home-btn {
   position: absolute;
   top: 1.7%;
@@ -66,5 +32,133 @@
   border: none;
   cursor: pointer;
   width: 1.9vw;
-  z-index: 110;
+  z-index: 999;
+}
+
+.home-btn img {
+  width: 100%;
+  display: block;
+}
+
+.plate-group {
+  position: absolute;
+  top: 69.5%;
+  left: 50%;
+  width: 27.5vw;
+  z-index: 10;
+}
+
+.main-plate {
+  width: 100%;
+}
+
+.food-item {
+  position: absolute;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  pointer-events: none;
+}
+
+.dining-table-front {
+  position: absolute;
+  bottom: 0.8%;
+  left: 20.3%;
+  width: 59.4%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.sugar-glider-container {
+  position: absolute;
+  bottom: 7.5%;
+  right: 65.2%;
+  width: 29vw;
+  z-index: 2;
+}
+
+.sugar-glider-body {
+  width: 100%;
+}
+
+.angry-bubble {
+  position: absolute;
+  top: -19.5%;
+  left: 87%;
+  width: 29.3vw;
+  z-index: 100;
+}
+
+.dirt-overlay {
+  position: absolute;
+  top: 72.7%;
+  left: 53.6%;
+  width: 14.3vw;
+  z-index: 6;
+}
+
+.game-over-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.game-over-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.game-over-container {
+  position: relative;
+  width: 33vw;
+  top: 1%;
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.game-over-window {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.retry-img-btn,
+.next-img-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.retry-img-btn img,
+.next-img-btn img {
+  width: 100%;
+  height: auto;
+}
+
+.retry-img-btn {
+  width: 9.2vw;
+  top: 44.6%;
+  left: 15.4%;
+}
+
+.next-img-btn {
+  width: 9.8vw;
+  top: 42.3%;
+  right: 14.4%;
 }

@@ -1,0 +1,31 @@
+/* คลุมเต็มหน้าจอเบราว์เซอร์ */
+.stat-overlay-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #bb9452 !important; /* สีเดียวกับหน้าอื่นเพื่อความเนียน */
+  z-index: 100002; /* ต้องสูงกว่าหน้า Dining (100001) */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+/* กรอบสัดส่วน 16:9 */
+.stat-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+}
+
+/* ภาพพื้นหลังสถิติ */
+.stat-full-bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* มั่นใจว่าภาพจะแปะเต็มกรอบ 16:9 และชิดขอบบน */
+  object-fit: fill; 
+}
