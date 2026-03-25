@@ -9,6 +9,7 @@ import SugarGliderRoom from "./pages/sugarGliderRoom/SugarGliderRoom";
 import SugarGliderFood from "./pages/sugarGliderRoom/SugarGliderFood";
 import SugarGliderDining from "./pages/sugarGliderRoom/SugarGliderDining";
 import SugarGliderFoodStat from "./pages/sugarGliderRoom/SugarGliderFoodStat";
+import SugarGliderForbiddenFood from "./pages/sugarGliderRoom/SugarGliderForbiddenFood";
 import HamsterRoom from "./pages/hamsterRoom/HamsterRoom";
 import HedgehogRoom from "./pages/hedgehogRoom/HedgehogRoom";
 import RabbitRoom from "./pages/rabbitRoom/RabbitRoom";
@@ -27,7 +28,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="sugar" element={<SugarGliderRoom />}>
             <Route path="food" element={<SugarGliderFood />}>
               <Route path="dining" element={<SugarGliderDining />}>
-                <Route path="stats" element={<SugarGliderFoodStat />} />
+                <Route path="stats" element={<SugarGliderFoodStat />}>
+                  <Route path="forbidden-food" element={<SugarGliderForbiddenFood />} />
+                </Route>
               </Route>
             </Route>
           </Route>

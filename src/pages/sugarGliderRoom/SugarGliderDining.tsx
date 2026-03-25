@@ -256,6 +256,16 @@ const SugarGliderDining = () => {
           </AnimatePresence>
         </motion.div>
 
+        {/* home button */}
+        <motion.button
+          className="home-btn"
+          onClick={() => navigate("/lobby")}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 1 }}
+        >
+          <img src={homeIcon} alt="Home" />
+        </motion.button>
+
         {/* Game Over Screen */}
         <AnimatePresence>
           {phase === "gameOver" && (
@@ -303,15 +313,6 @@ const SugarGliderDining = () => {
           )}
         </AnimatePresence>
 
-        {/* home button */}
-        <motion.button
-          className="home-btn"
-          onClick={() => navigate("/lobby")}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 1 }}
-        >
-          <img src={homeIcon} alt="Home" />
-        </motion.button>
         <Outlet />
       </div>
     </motion.div>

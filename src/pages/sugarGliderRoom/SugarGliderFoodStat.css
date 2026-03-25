@@ -86,10 +86,27 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 999;
+  z-index: 100010;
 }
 
 .food-age-btn img {
+  width: 100%;
+  display: block;
+}
+
+.next-forbidden-btn {
+  position: absolute;
+  bottom: 3.6%;
+  right: 4.5%;
+  width: 6.6vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100010;
+}
+
+.next-forbidden-btn img {
   width: 100%;
   display: block;
 }
@@ -128,22 +145,39 @@
   display: block;
 }
 
-.food-age-window-container {
+.food-age-window-overlay {
   position: absolute;
-  top: 40%;
-  left: 15%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  z-index: 100007;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100007;
 }
 
-.placeholder-window {
-  color: white;
-  padding: 40px;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 20px;
-  text-align: center;
+.food-age-window-container {
+  position: relative;
+  width: 73%;
+  max-width: 1000px;
+}
+
+.food-age-window-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.close-window-btn {
+  position: absolute;
+  top: 12.6%;
+  right: 4.6%;
+  background: transparent;
+  border: none;
+  width: 4.2%;
+  height: 7%;
+  cursor: pointer;
+  z-index: 100008;
 }

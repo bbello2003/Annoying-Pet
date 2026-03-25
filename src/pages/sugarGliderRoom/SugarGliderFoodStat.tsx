@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "./SugarGliderFoodStat.css";
 
 // Assets
@@ -12,6 +12,8 @@ import vegetableWin from "../../assets/sugarGliderRoom/vegetable-window.png";
 import foodAgeBtn from "../../assets/sugarGliderRoom/food-age-button.png";
 import foodAgeBg from "../../assets/sugarGliderRoom/food-age-background.png";
 import exploreBtn from "../../assets/sugarGliderRoom/explore-button.png";
+import foodAgeWindowImg from "../../assets/sugarGliderRoom/food-age-window.png";
+import nextForbiddenBtn from "../../assets/sugarGliderRoom/next-forbidden-food-button.png";
 
 const SugarGliderFoodStat = () => {
   const navigate = useNavigate();
@@ -26,8 +28,11 @@ const SugarGliderFoodStat = () => {
   ];
 
   const handleExploreClick = () => {
-    console.log("Explore clicked!");
     setIsFoodAgeWindowVisible(true);
+  };
+
+  const handleNextForbidden = () => {
+    navigate("/lobby/sugar/food/dining/stats/forbidden-food");
   };
 
   return (
@@ -58,7 +63,7 @@ const SugarGliderFoodStat = () => {
                 opacity: activeTab === win.id ? 1 : 0,
                 visibility: activeTab === win.id ? "visible" : "hidden",
               }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             />
           ))}
 
@@ -78,17 +83,37 @@ const SugarGliderFoodStat = () => {
           </div>
         </div>
 
-        {/* To Food Age Page Button */}
-        {!isAgeVisible && (
-          <motion.button
-            className="food-age-btn"
-            onClick={() => setIsAgeVisible(true)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 1 }}
-          >
-            <img src={foodAgeBtn} alt="Go to Food Age Section" />
-          </motion.button>
-        )}
+        <AnimatePresence>
+          {!isAgeVisible ? (
+            <motion.button
+              key="food-age-btn"
+              className="food-age-btn"
+              onClick={() => setIsAgeVisible(true)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 1 }}
+            >
+              <img src={foodAgeBtn} alt="Go to Food Age Section" />
+            </motion.button>
+          ) : (
+            <motion.button
+              key="next-forbidden-btn"
+              className="next-forbidden-btn"
+              onClick={handleNextForbidden}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 1 }}
+            >
+              <img src={nextForbiddenBtn} alt="Next to Forbidden Food" />
+            </motion.button>
+          )}
+        </AnimatePresence>
 
         {/* Food Age Overlay */}
         <AnimatePresence>
@@ -106,14 +131,16 @@ const SugarGliderFoodStat = () => {
                 alt="Food Age Background"
               />
 
-              <motion.button
-                className="explore-btn"
-                onClick={handleExploreClick}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 1 }}
-              >
-                <img src={exploreBtn} alt="Explore Button" />
-              </motion.button>
+              {!isFoodAgeWindowVisible && (
+                <motion.button
+                  className="explore-btn"
+                  onClick={handleExploreClick}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1 }}
+                >
+                  <img src={exploreBtn} alt="Explore Button" />
+                </motion.button>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -122,18 +149,27 @@ const SugarGliderFoodStat = () => {
         <AnimatePresence>
           {isFoodAgeWindowVisible && (
             <motion.div
-              className="food-age-window-container"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              className="food-age-window-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              <div className="placeholder-window">
-                <p>หน้าต่างข้อมูลอาหารตามช่วงอายุ</p>
-                <button onClick={() => setIsFoodAgeWindowVisible(false)}>
-                  ปิด
-                </button>
-              </div>
+              <motion.div
+                className="food-age-window-container"
+                initial={{ scale: 0.8, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.8, y: 20 }}
+              >
+                <img
+                  src={foodAgeWindowImg}
+                  className="food-age-window-img"
+                  alt="Food Age Info"
+                />
+                <button
+                  className="close-window-btn"
+                  onClick={() => setIsFoodAgeWindowVisible(false)}
+                ></button>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -148,6 +184,8 @@ const SugarGliderFoodStat = () => {
           <img src={homeIcon} alt="Return to Lobby" />
         </motion.button>
       </div>
+      
+      <Outlet />
     </motion.div>
   );
 };

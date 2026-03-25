@@ -1,0 +1,90 @@
+.forbidden-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f9c66d !important;
+  z-index: 100020;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.forbidden-page.summary-bg-active {
+  background-color: #7d6337 !important;
+}
+
+.forbidden-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+}
+
+.forbidden-full-bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+}
+
+.filter-overlay, .summary-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.summary-overlay {
+  z-index: 50;
+}
+
+.forbidden-filter-group {
+  position: absolute;
+  top: 36.5%; 
+  left: 5.4%;
+  width: 46%;
+  height: 7.5%;
+  display: flex;
+  gap: 3%;
+  z-index: 20;
+}
+
+.filter-hitbox {
+  flex: 1;
+  cursor: pointer;
+}
+
+.forbidden-next-btn {
+  position: absolute;
+  bottom: 6.5%;
+  right: 4.6%;
+  width: 6.5vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
+}
+
+.forbidden-home-circle-btn {
+  position: absolute;
+  bottom: 6.5%;
+  right: 4.6%;
+  width: 6.5vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 110;
+}
+
+.forbidden-next-btn img, .forbidden-home-circle-btn img {
+  width: 100%;
+  display: block;
+}
