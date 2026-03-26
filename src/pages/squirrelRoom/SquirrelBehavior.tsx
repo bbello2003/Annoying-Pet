@@ -108,7 +108,7 @@ const SquirrelBehavior = () => {
           className="next-page-btn"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 1 }}
-          onClick={() => navigate("/lobby")}
+          onClick={() => navigate("switch")}
         />
 
         {/* Overlay Popup System */}
