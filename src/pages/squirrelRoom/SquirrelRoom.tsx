@@ -95,16 +95,15 @@ const SquirrelRoom = () => {
   };
 
   const initialTransition = {
-    type: "spring" as const, // ระบุเป็น const
+    type: "spring" as const,
     stiffness: 400,
     damping: 15,
     delay: 0.2,
   };
 
-  // 2. กำหนดรูปแบบ Transition สำหรับตอนสไลด์ขวา (Tween)
   const instinctTransition = {
-    type: "tween" as const, // ระบุเป็น const
-    ease: "easeOut" as const, // ease ก็ต้องระบุเป็น const เช่นกัน
+    type: "tween" as const,
+    ease: "easeOut" as const,
     duration: 0.4,
   };
 
@@ -221,7 +220,7 @@ const SquirrelRoom = () => {
               )}
             </AnimatePresence>
 
-            {/* 2. หน้าต่างสัญชาตญาณ และ Topic: Fade In ขึ้นมา */}
+            {/* instinct window */}
             <AnimatePresence>
               {isInstinctView && (
                 <motion.div
