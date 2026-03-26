@@ -14,6 +14,8 @@ import HamsterRoom from "./pages/hamsterRoom/HamsterRoom";
 import HedgehogRoom from "./pages/hedgehogRoom/HedgehogRoom";
 import RabbitRoom from "./pages/rabbitRoom/RabbitRoom";
 import SquirrelRoom from "./pages/squirrelRoom/SquirrelRoom";
+import SquirrelBehavior from "./pages/squirrelRoom/SquirrelBehavior";
+import SquirrelSwitch from "./pages/squirrelRoom/SquirrelSwitch";
 import SecretRoom from "./pages/secretRoom/SecretRoom";
 
 import "./index.css";
@@ -29,14 +31,20 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="food" element={<SugarGliderFood />}>
               <Route path="dining" element={<SugarGliderDining />}>
                 <Route path="stats" element={<SugarGliderFoodStat />}>
-                  <Route path="forbidden-food" element={<SugarGliderForbiddenFood />} />
+                  <Route path="forbidden-food" element={<SugarGliderForbiddenFood />}
+                  />
                 </Route>
               </Route>
             </Route>
           </Route>
           <Route path="rabbit" element={<RabbitRoom />} />
           <Route path="hamster" element={<HamsterRoom />} />
-          <Route path="squirrel" element={<SquirrelRoom />} />
+          <Route path="squirrel" element={<SquirrelRoom />}>
+            <Route path="behavior" element={<SquirrelBehavior />}>
+                  <Route path="switch" element={<SquirrelSwitch />}
+                  />
+                </Route>
+          </Route>
           <Route path="hedgehog" element={<HedgehogRoom />} />
           <Route path="secret" element={<SecretRoom />} />
         </Route>

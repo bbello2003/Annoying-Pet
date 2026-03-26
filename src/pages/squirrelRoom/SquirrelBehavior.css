@@ -1,0 +1,138 @@
+.behavior-page-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #5c9752;
+  transition:
+    filter 0.2s ease-out,
+    background-color 0.2s ease-out;
+}
+
+.behavior-page-container.is-showing-popup {
+  background-color: #34592e;
+}
+
+.behavior-content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  aspect-ratio: 16 / 9;
+  margin-top: 0;
+}
+
+.main-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* --- Folders --- */
+.folder-list {
+  position: absolute;
+  left: 4.3%;
+  top: 0;
+  width: 10.3%;
+  height: 100%;
+}
+
+.folder-item {
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* --- Next Button --- */
+.next-page-btn {
+  position: absolute;
+  bottom: 6.5%;
+  right: 4.6%;
+  width: 6.5vw;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* --- Popup Modal --- */
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-card {
+  position: relative;
+  width: 56.5%;
+  max-width: 1085px;
+  display: block;
+  line-height: 0;
+}
+
+.popup-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.squirrel-target-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.animated-squirrel {
+  position: absolute;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.popup-card.destruction .animated-squirrel {
+  width: 52.1%;
+  transform: translate(-47.5%, 9.5%);
+}
+
+.popup-card.space .animated-squirrel {
+  width: 37.9%;
+  transform: translate(-59.2%, 3.3%);
+}
+
+.popup-card.noisy .animated-squirrel {
+  width: 32.3%;
+  transform: translate(-68.5%, 9.9%);
+}
+
+.popup-card.nightlife .animated-squirrel {
+  width: 37.1%;
+  transform: translate(-60.5%, 3.5%);
+}
+
+.invisible-close-btn {
+  position: absolute;
+  top: 13%;
+  right: 3.4%;
+  width: 4.5%;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  background-color: transparent;
+  z-index: 101;
+}

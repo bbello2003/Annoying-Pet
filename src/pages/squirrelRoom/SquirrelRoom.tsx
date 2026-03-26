@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./SquirrelRoom.css";
 
@@ -109,7 +109,7 @@ const SquirrelRoom = () => {
 
   return (
     <motion.div
-      className="room-overlay"
+      className={`squirrel-room-overlay ${isAdopted ? "is-adopted-bg" : ""}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
@@ -262,7 +262,7 @@ const SquirrelRoom = () => {
                   transition={{ duration: 0.3 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 1 }}
-                  onClick={() => navigate("/next-page")}
+                  onClick={() => navigate("behavior")}
                 />
               )}
             </AnimatePresence>
@@ -282,7 +282,7 @@ const SquirrelRoom = () => {
               className="image-wrapper adopt-layer"
               exit={{ opacity: 0 }}
             >
-              <img src={bgFirstPage} className="img-auto" />
+              <img src={bgFirstPage} className="img-auto" alt="First Page" />
               <motion.button
                 className="adopt-btn-overlay"
                 whileHover={{ scale: 1.05 }}
@@ -294,6 +294,8 @@ const SquirrelRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <Outlet />
       </div>
     </motion.div>
   );
