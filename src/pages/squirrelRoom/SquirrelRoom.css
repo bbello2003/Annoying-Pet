@@ -161,3 +161,30 @@
   z-index: 60;
   transition: transform 0.2s;
 }
+
+/* คลุมส่วนของ Text และ Window */
+.instinct-content-wrapper {
+  position: absolute;
+  top: 12.2%;
+  left: 5.6%;
+  width: 40%; /* ปรับตามความเหมาะสม */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 80;
+}
+
+.instinct-topic-style {
+  width: 76.5%; /* ขนาดหัวข้อ */
+  height: auto;
+}
+
+.instinct-window-style {
+  width: 100%; /* ขนาดหน้าต่าง Checklist */
+  height: auto;
+}
+
+/* ปรับ transition ของกระรอกให้ลื่นขึ้น */
+.squirrel-still-pos {
+  transition: x 0.8s ease-in-out;
+}

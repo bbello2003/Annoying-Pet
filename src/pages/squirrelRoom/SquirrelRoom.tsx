@@ -21,6 +21,9 @@ import bellyAngOp from "../../assets/squirrelRoom/dont-touch-belly-opinion.png";
 import upsetTopic from "../../assets/squirrelRoom/upset-topic-text.png";
 import headAngOp from "../../assets/squirrelRoom/dont-play-head-opinion.png";
 import nextBtn from "../../assets/squirrelRoom/instinct-next-button.png";
+import instinctTopicText from "../../assets/squirrelRoom/instinct-topic-text.png";
+import instinctWindow from "../../assets/squirrelRoom/instinct-window.png";
+import behaviorNextBtn from "../../assets/squirrelRoom/behavior-next-button.png";
 
 const SquirrelRoom = () => {
   const navigate = useNavigate();
@@ -28,6 +31,7 @@ const SquirrelRoom = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isAngry, setIsAngry] = useState(false);
   const [showInteraction, setShowInteraction] = useState(false);
+  const [isInstinctView, setIsInstinctView] = useState(false);
 
   const handleAdopt = () => {
     setIsAdopted(true);
@@ -46,10 +50,14 @@ const SquirrelRoom = () => {
         setIsAngry(false);
         setCurrentStep((prev) => prev + 1);
         setShowInteraction(true);
-      }, 1500);
+      }, 1200);
     } else {
       setCurrentStep(4);
     }
+  };
+
+  const handleGoToInstinct = () => {
+    setIsInstinctView(true);
   };
 
   const stepData: Record<
@@ -77,11 +85,27 @@ const SquirrelRoom = () => {
   };
 
   const getSquirrelImg = () => {
+    if (isInstinctView) return squirrelDef;
+
     if (isAngry) return squirrelAng;
     if (currentStep === 4) return squirrelAng;
     if (currentStep === 1 && !isAngry) return squirrelSmi;
     if (currentStep > 1 && currentStep <= 3) return squirrelDef;
     return squirrelSmi;
+  };
+
+  const initialTransition = {
+    type: "spring" as const, // ระบุเป็น const
+    stiffness: 400,
+    damping: 15,
+    delay: 0.2,
+  };
+
+  // 2. กำหนดรูปแบบ Transition สำหรับตอนสไลด์ขวา (Tween)
+  const instinctTransition = {
+    type: "tween" as const, // ระบุเป็น const
+    ease: "easeOut" as const, // ease ก็ต้องระบุเป็น const เช่นกัน
+    duration: 0.4,
   };
 
   return (
@@ -110,58 +134,65 @@ const SquirrelRoom = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={
                 isAdopted
-                  ? { opacity: 1, scale: 1 }
+                  ? {
+                      opacity: 1,
+                      scale: 1,
+                      x: isInstinctView ? "60%" : "31%",
+                      left: "27.5%",
+                    }
                   : { opacity: 0, scale: 0.8 }
               }
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 15,
-                delay: 0.2,
-              }}
+              transition={
+                isInstinctView ? instinctTransition : initialTransition
+              }
             />
 
             {/* Opinion Logic */}
-            <AnimatePresence>
-              {isAdopted && (
-                <motion.img
-                  key={
-                    currentStep === 0 || (currentStep === 1 && !isAngry)
-                      ? "initial-happy"
-                      : `step-${currentStep}-${isAngry}`
-                  }
-                  src={
-                    isAngry || currentStep === 4
-                      ? stepData[currentStep === 4 ? 3 : currentStep]?.opinion
-                      : currentStep === 0 || currentStep === 1
-                        ? happyOpinion
-                        : undefined
-                  }
-                  className="happy-opinion-pos"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={
-                    isAngry || currentStep <= 1 || currentStep === 4
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.5 }
-                  }
-                  exit={{
-                    opacity: 0,
-                    scale: 0.5,
-                    transition: { duration: 0.1 },
-                  }}
-                  transition={
-                    currentStep <= 1 && !isAngry
-                      ? {
-                          type: "spring",
-                          stiffness: 500,
-                          damping: 25,
-                          delay: 0.5,
-                        }
-                      : { duration: 0.2 }
-                  }
-                />
-              )}
-            </AnimatePresence>
+            {!isInstinctView && (
+              <>
+                <AnimatePresence>
+                  {isAdopted && (
+                    <motion.img
+                      key={
+                        currentStep === 0 || (currentStep === 1 && !isAngry)
+                          ? "initial-happy"
+                          : `step-${currentStep}-${isAngry}`
+                      }
+                      src={
+                        isAngry || currentStep === 4
+                          ? stepData[currentStep === 4 ? 3 : currentStep]
+                              ?.opinion
+                          : currentStep === 0 || currentStep === 1
+                            ? happyOpinion
+                            : undefined
+                      }
+                      className="happy-opinion-pos"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={
+                        isAngry || currentStep <= 1 || currentStep === 4
+                          ? { opacity: 1, scale: 1 }
+                          : { opacity: 0, scale: 0.5 }
+                      }
+                      exit={{
+                        opacity: 0,
+                        scale: 0.5,
+                        transition: { duration: 0.1 },
+                      }}
+                      transition={
+                        currentStep <= 1 && !isAngry
+                          ? {
+                              type: "spring",
+                              stiffness: 500,
+                              damping: 25,
+                              delay: 0.5,
+                            }
+                          : { duration: 0.2 }
+                      }
+                    />
+                  )}
+                </AnimatePresence>
+              </>
+            )}
 
             {/* Topic & Click Icon */}
             <AnimatePresence>
@@ -190,15 +221,52 @@ const SquirrelRoom = () => {
               )}
             </AnimatePresence>
 
-            {currentStep === 4 && (
-              <motion.img
-                src={nextBtn}
-                className="next-btn-pos"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 1 }}
-                onClick={() => navigate("/next-page")}
-              />
-            )}
+            {/* 2. หน้าต่างสัญชาตญาณ และ Topic: Fade In ขึ้นมา */}
+            <AnimatePresence>
+              {isInstinctView && (
+                <motion.div
+                  className="instinct-content-wrapper"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                >
+                  <img
+                    src={instinctTopicText}
+                    className="instinct-topic-style"
+                  />
+                  <img src={instinctWindow} className="instinct-window-style" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {!isInstinctView ? (
+                currentStep === 4 && (
+                  <motion.img
+                    key="instinct-btn"
+                    src={nextBtn}
+                    className="next-btn-pos"
+                    exit={{ opacity: 0 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 1 }}
+                    onClick={handleGoToInstinct}
+                  />
+                )
+              ) : (
+                <motion.img
+                  key="behavior-btn"
+                  src={behaviorNextBtn}
+                  className="next-btn-pos"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1 }}
+                  onClick={() => navigate("/next-page")}
+                />
+              )}
+            </AnimatePresence>
 
             <img
               src={weightLifting}
