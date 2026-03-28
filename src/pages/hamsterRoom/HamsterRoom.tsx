@@ -129,7 +129,6 @@ const HamsterRoom = () => {
       className="hamster-room-overlay"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, backgroundColor: getBgColor() }}
-      transition={{ duration: 0.8 }}
     >
       <div className="hamster-responsive-container">
         {/* Home Button */}

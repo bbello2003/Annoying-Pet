@@ -60,7 +60,6 @@ const SugarGliderRoom = () => {
       className="room-overlay"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
     >
       <div className="room-wrapper">
         <div className="tab-bar-container">
