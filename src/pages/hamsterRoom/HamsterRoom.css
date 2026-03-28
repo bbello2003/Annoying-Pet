@@ -1,45 +1,232 @@
-.room-overlay {
+.hamster-room-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.room-bg {
+.hamster-responsive-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.background-layer,
+.sequence-layer,
+.img-full-wrapper,
+.adopt-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.background-layer {
+  z-index: 1;
+}
+.sequence-layer {
+  z-index: 10;
+}
+
+.img-full {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top;
+  object-fit: fill;
   display: block;
 }
 
-.back-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    pointer-events: auto;
-    font-weight: bold;
-    transition: transform 0.2s ease;
+/* UI Components */
+.home-btn,
+.info-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000;
 }
 
-.back-btn:hover {
-    transform: scale(1.05);
-    background-color: #fff;
+.home-btn {
+  top: 1.7%;
+  left: 1.3%;
+  width: 2vw;
+}
+.info-btn {
+  top: 9.5%;
+  right: 1.45%;
+  width: 3.8vw;
 }
 
-.room-info {
-    position: absolute;
-    bottom: 10%;
-    width: 100%;
-    text-align: center;
-    color: white;
+.home-btn img,
+.info-btn img {
+  width: 100%;
+  display: block;
+}
+
+.gadget-topic-container {
+  position: absolute;
+  top: 11.5%;
+  left: 3.2%;
+  width: 19.6%;
+  pointer-events: none;
+}
+
+/* Character */
+.main-char-container {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 24%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.main-char-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Invisible Buttons */
+.invisible-step-btn {
+  position: absolute;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.btn-step-1 {
+  top: 42.7%;
+  left: 53.1%;
+  width: 13.2%;
+  height: 6%;
+}
+.btn-step-3 {
+  top: 42.6%;
+  left: 55.4%;
+  width: 13.3%;
+  height: 6.2%;
+}
+.btn-step-5 {
+  top: 44.2%;
+  left: 41.2%;
+  width: 13.2%;
+  height: 6%;
+}
+.btn-step-7 {
+  top: 37.2%;
+  left: 60.5%;
+  width: 13.3%;
+  height: 6%;
+}
+.btn-step-9 {
+  top: 40.5%;
+  left: 56.4%;
+  width: 11.3%;
+  height: 5%;
+}
+.btn-step-11 {
+  top: 42.7%;
+  left: 53.4%;
+  width: 13.3%;
+  height: 6%;
+}
+.btn-step-13 {
+  top: 42.6%;
+  left: 50.8%;
+  width: 13.3%;
+  height: 5.8%;
+}
+
+/* Overlays & Popups */
+.adopt-overlay {
+  z-index: 20;
+}
+
+.adopt-btn-pos {
+  position: absolute;
+  bottom: 6.9%;
+  left: 40.9%;
+  width: 16.45%;
+  cursor: pointer;
+}
+
+.noti-overlay,
+.price-info-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noti-overlay {
+  z-index: 30;
+  top: -3.4%;
+}
+.price-info-overlay {
+  z-index: 3000;
+}
+
+.noti-content {
+  position: relative;
+  width: 45%;
+}
+.price-info-content {
+  position: relative;
+  width: 37.3%;
+}
+
+.noti-btn-trigger {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 33%;
+  height: 25%;
+  cursor: pointer;
+}
+
+.close-info-trigger {
+  position: absolute;
+  top: 4.7%;
+  right: 4.9%;
+  width: 6.7%;
+  height: 13%;
+  cursor: pointer;
+}
+
+.next-arrow-btn {
+  position: absolute;
+  bottom: 6.5%;
+  right: 4.6%;
+  width: 6.5vw;
+  cursor: pointer;
+  z-index: 105;
+}
+
+.home-circle-btn {
+  position: absolute;
+  bottom: 6.5%;
+  right: 4.6%;
+  width: 6.5vw;
+  cursor: pointer;
+  z-index: 105;
+}
+
+.cash-effect-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5000;
+}
+
+.cash-gif-instance {
+  position: absolute;
+  width: 30vw;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
