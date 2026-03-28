@@ -80,7 +80,7 @@ const HamsterRoom = () => {
 
   useEffect(() => {
     if (currentStep?.autoNext) {
-      const timer = setTimeout(triggerNext, 1200);
+      const timer = setTimeout(triggerNext, 1000);
       return () => clearTimeout(timer);
     }
   }, [stepIndex, currentStep]);
@@ -94,7 +94,7 @@ const HamsterRoom = () => {
     setShowNoti(false);
     setIsHamsterRight(true);
     setShowTopic(true);
-    setTimeout(() => setStepIndex(0), 1800);
+    setTimeout(() => setStepIndex(0), 1200);
   };
 
   const getBgColor = () => {
@@ -116,7 +116,7 @@ const HamsterRoom = () => {
 
     setTimeout(() => {
       setCashEffects((prev) => prev.filter((eff) => eff.id !== id));
-    }, 1000);
+    }, 800);
   };
 
   const handleStepClick = (e: MouseEvent<HTMLElement>, index: number) => {

@@ -225,7 +225,7 @@
 
 .cash-gif-instance {
   position: absolute;
-  width: 30vw;
+  width: 45vw;
   height: auto;
   transform: translate(-50%, -50%);
   pointer-events: none;
