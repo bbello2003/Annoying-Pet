@@ -82,7 +82,7 @@ const SquirrelSwitch = () => {
             className="invisible-switch-hitbox"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            onClick={() => navigate("/lobby/squirrel/clean")}
+            onClick={() => navigate("clean")}
           >
           </motion.div>
         )}

@@ -1,0 +1,137 @@
+.clean-page-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #79c96c;
+  transition: background-color 0.5s ease;
+}
+
+.clean-page-container.is-finished {
+  background-color: #5f9457;
+}
+
+.clean-content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  aspect-ratio: 16 / 9;
+}
+
+.clean-main-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* --- Common Style --- */
+.repair-item {
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.repair-item img {
+  width: 100%;
+  height: auto;
+  transition: none !important;
+}
+
+/* --- Squirrel Position --- */
+.clean-squirrel-pos {
+  position: absolute;
+  bottom: 7.4%;
+  left: 54%;
+  transform: translateX(-50%);
+  width: 33.6%;
+  display: block;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* --- Positions --- */
+.weight-messed {
+  bottom: 3.2%;
+  left: 13.25%;
+  width: 36.3%;
+  z-index: 50;
+}
+.weight-fixed {
+  bottom: 0.7%;
+  left: 13.25%;
+  width: 30.3%;
+  z-index: 50;
+}
+
+.shelf-messed {
+  top: 50.9%;
+  left: 22.65%;
+  width: 25.8%;
+}
+.shelf-fixed {
+  top: 51.1%;
+  left: 22.65%;
+  width: 25.8%;
+}
+
+.ball-messed {
+  top: 63.6%;
+  left: 2.3%;
+  width: 21.5%;
+}
+.ball-fixed {
+  top: 40.4%;
+  left: -1.4%;
+  width: 24.6%;
+}
+
+.kettle-messed {
+  bottom: 11.2%;
+  right: 25.5%;
+  width: 9.7%;
+}
+.kettle-fixed {
+  bottom: 10.9%;
+  right: 27%;
+  width: 8.5%;
+}
+
+.dumbell-messed {
+  bottom: 10.9%;
+  left: 0.8%;
+  width: 9.7%;
+}
+.dumbell-fixed {
+  bottom: 11%;
+  left: 2.7%;
+  width: 9.7%;
+}
+
+/* --- UI Positions --- */
+.clean-topic-pos {
+  position: absolute;
+  top: 13.1%;
+  left: 33%;
+  width: 34%;
+  z-index: 60;
+}
+
+.clean-home-circle-pos {
+  position: absolute;
+  bottom: 5.6%;
+  right: 4.6%;
+  width: 6.5%;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.clean-home-circle-pos img {
+  width: 100%;
+  height: auto;
+}
