@@ -11,7 +11,7 @@ import squirrelDef from "../../assets/squirrelRoom/squirrel-default.png";
 import squirrelSmi from "../../assets/squirrelRoom/squirrel-smile.png";
 import squirrelAng from "../../assets/squirrelRoom/squirrel-angry.png";
 import weightLifting from "../../assets/squirrelRoom/weightlifting.png";
-import clickIcon from "../../assets/squirrelRoom/click-icon.png";
+import clickIcon from "../../assets/components/click-icon.png";
 import happyOpinion from "../../assets/squirrelRoom/today-happy-opinion.png";
 
 import tailTopic from "../../assets/squirrelRoom/tail-topic-text.png";
