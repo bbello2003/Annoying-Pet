@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./HedgehogRoom.css";
 
@@ -96,7 +96,7 @@ const HedgehogRoom = () => {
             className="hedgehog-clean-home-wrapper"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 1 }}
-            onClick={() => navigate("/clean-home")}
+            onClick={() => navigate("clean")}
           >
             <img
               src={cleanHomeBtn}
@@ -220,6 +220,8 @@ const HedgehogRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <Outlet />
       </div>
     </motion.div>
   );

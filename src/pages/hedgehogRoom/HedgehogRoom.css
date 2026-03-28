@@ -38,7 +38,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 9000;
 }
 
 .hedgehog-home-btn img {

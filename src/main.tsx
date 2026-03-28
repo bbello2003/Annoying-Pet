@@ -12,6 +12,7 @@ import SugarGliderFoodStat from "./pages/sugarGliderRoom/SugarGliderFoodStat";
 import SugarGliderForbiddenFood from "./pages/sugarGliderRoom/SugarGliderForbiddenFood";
 import HamsterRoom from "./pages/hamsterRoom/HamsterRoom";
 import HedgehogRoom from "./pages/hedgehogRoom/HedgehogRoom";
+import HedgehogCleanRoom from "./pages/hedgehogRoom/HedgehogCleanRoom";
 import RabbitRoom from "./pages/rabbitRoom/RabbitRoom";
 import SquirrelRoom from "./pages/squirrelRoom/SquirrelRoom";
 import SquirrelBehavior from "./pages/squirrelRoom/SquirrelBehavior";
@@ -49,7 +50,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               </Route>
             </Route>
           </Route>
-          <Route path="hedgehog" element={<HedgehogRoom />} />
+          <Route path="hedgehog" element={<HedgehogRoom />}>
+            <Route path="clean" element={<HedgehogCleanRoom />} />
+          </Route>
           <Route path="secret" element={<SecretRoom />} />
         </Route>
       </Routes>
