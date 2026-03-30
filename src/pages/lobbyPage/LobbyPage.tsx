@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate, Outlet } from "react-router-dom";
 import "./LobbyPage.css";
 
+// Import Assets
 import lobbyBg from "../../assets/lobbyPage/lobby.png";
 import rabbitDef from "../../assets/lobbyPage/rabbit-room-default.png";
 import rabbitAct from "../../assets/lobbyPage/rabbit-room-sick.png";
@@ -19,34 +20,9 @@ import secretAct from "../../assets/lobbyPage/secret-room-code.png";
 import exploreTopic from "../../assets/lobbyPage/explore-topic.png";
 import moneySound from "../../assets/sounds/money-sound-effect.mp3";
 
-const POOL_SIZE = 10;
-export const cashAudioPool = Array.from({ length: POOL_SIZE }, () => {
-  const audio = new Audio(moneySound);
-  audio.preload = "auto";
-  audio.load();
-  return audio;
-});
-
-let poolIndex = 0;
-
-export const playGlobalCashSound = () => {
-  const audio = cashAudioPool[poolIndex];
-
-  audio.currentTime = 1;
-  audio.volume = 0.5;
-
-  const onTimeUpdate = () => {
-    if (audio.currentTime >= 2) {
-      audio.pause();
-      audio.removeEventListener("timeupdate", onTimeUpdate);
-    }
-  };
-
-  audio.addEventListener("timeupdate", onTimeUpdate);
-  audio.play().catch(() => {});
-
-  poolIndex = (poolIndex + 1) % POOL_SIZE;
-};
+export const globalCashAudio = new Audio(moneySound);
+globalCashAudio.preload = "auto";
+globalCashAudio.load();
 
 const ROOMS_CONFIG = [
   {
@@ -153,6 +129,7 @@ const LobbyPage = () => {
           );
         })}
       </div>
+
       <Outlet />
     </div>
   );

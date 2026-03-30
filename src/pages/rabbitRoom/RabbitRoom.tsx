@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitRoom.css";
 
-import { playGlobalCashSound } from "../lobbyPage/LobbyPage";
+import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
 import homeIcon from "../../assets/components/home-icon.png";
 import adoptBtnImg from "../../assets/components/adopt-button.png";
 import clickIcon from "../../assets/components/click-icon.png";
@@ -51,11 +51,32 @@ const RabbitRoom = () => {
 
   const handleAdopt = () => setIsAdopted(true);
 
+  const playCashSound = () => {
+    if (!globalCashAudio) return;
+
+    const soundClone = globalCashAudio.cloneNode(true) as HTMLAudioElement;
+    soundClone.volume = 0.5;
+
+    const startTime = 1;
+    const endTime = 2;
+    soundClone.currentTime = startTime;
+
+    const onTimeUpdate = () => {
+      if (soundClone.currentTime >= endTime) {
+        soundClone.pause();
+        soundClone.removeEventListener("timeupdate", onTimeUpdate);
+      }
+    };
+
+    soundClone.addEventListener("timeupdate", onTimeUpdate);
+    soundClone.play().catch((err) => console.log("Audio play blocked", err));
+  };
+
   const spawnCashAtSyringe = (info: any) => {
     const container = document.querySelector(".rabbit-responsive-container");
     if (!container) return;
 
-    playGlobalCashSound();
+    playCashSound();
 
     const rect = container.getBoundingClientRect();
     const xPercent = ((info.point.x - rect.left) / rect.width) * 100;
@@ -122,6 +143,7 @@ const RabbitRoom = () => {
         >
           <img src={homeIcon} alt="Home" />
         </motion.button>
+
         <AnimatePresence mode="popLayout">
           {isAdopted && !showWindowLayer && (
             <motion.div
@@ -178,6 +200,7 @@ const RabbitRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
         <AnimatePresence mode="popLayout">
           {showWindowLayer && (
             <motion.div
@@ -237,15 +260,16 @@ const RabbitRoom = () => {
                       ease: "easeInOut",
                     }}
                   >
+                    {" "}
                     <img
                       src={bgRabbitPlayed}
                       className="rabbit-img-full"
                       alt="Played"
-                    />
+                    />{" "}
                     <div
                       className="next-step-trigger"
                       onClick={handleNextStepClick}
-                    />
+                    />{" "}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -258,11 +282,12 @@ const RabbitRoom = () => {
                     transition={{ duration: 0.8 }}
                     style={{ zIndex: 140 }}
                   >
+                    {" "}
                     <img
                       src={bgRabbitSick}
                       className="rabbit-img-full"
                       alt="Sick"
-                    />
+                    />{" "}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -274,6 +299,7 @@ const RabbitRoom = () => {
                     animate={{ opacity: 1 }}
                     style={{ zIndex: 150 }}
                   >
+                    {" "}
                     <motion.div
                       className="warning-container"
                       initial={{ scale: 0.5, opacity: 0 }}
@@ -285,16 +311,17 @@ const RabbitRoom = () => {
                         stiffness: 300,
                       }}
                     >
+                      {" "}
                       <img
                         src={warningWindow}
                         className="warning-img"
                         alt="Warning"
-                      />
+                      />{" "}
                       <div
                         className="warning-confirm-btn"
                         onClick={handleConfirmWarning}
-                      />
-                    </motion.div>
+                      />{" "}
+                    </motion.div>{" "}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -307,22 +334,25 @@ const RabbitRoom = () => {
                     transition={{ duration: 0.8 }}
                     style={{ zIndex: 160 }}
                   >
+                    {" "}
                     <div
                       className="rabbit-img-full"
                       style={{ position: "relative" }}
                     >
+                      {" "}
                       <img
                         src={rabbitHeal1}
                         className="rabbit-img-full"
                         alt="Heal Base"
-                      />
+                      />{" "}
                       <div className="blood-bar-container">
+                        {" "}
                         <img
                           src={getBloodImg()}
                           className="blood-bar-img"
                           alt="Blood Progress"
-                        />
-                      </div>
+                        />{" "}
+                      </div>{" "}
                       <motion.div
                         className="syringe-container"
                         drag="x"
@@ -338,15 +368,17 @@ const RabbitRoom = () => {
                           damping: 30,
                         }}
                       >
+                        {" "}
                         <img
                           src={syringeImg}
                           className="syringe-img"
                           alt="Syringe"
                           draggable="false"
-                        />
-                      </motion.div>
-                    </div>
+                        />{" "}
+                      </motion.div>{" "}
+                    </div>{" "}
                     <AnimatePresence>
+                      {" "}
                       {isHealed && (
                         <motion.div
                           key="done-layer"
@@ -359,11 +391,12 @@ const RabbitRoom = () => {
                             zIndex: 190,
                           }}
                         >
+                          {" "}
                           <img
                             src={bgBlood100}
                             className="rabbit-img-full"
                             alt="Heal Done"
-                          />
+                          />{" "}
                           <motion.img
                             src={nextFactorBtnImg}
                             className="next-factor-btn-img"
@@ -375,16 +408,17 @@ const RabbitRoom = () => {
                             whileTap={{ scale: 1 }}
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                          />
+                          />{" "}
                         </motion.div>
-                      )}
-                    </AnimatePresence>
+                      )}{" "}
+                    </AnimatePresence>{" "}
                   </motion.div>
                 )}
               </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
+
         <AnimatePresence mode="popLayout">
           {!isAdopted && (
             <motion.div
@@ -411,6 +445,7 @@ const RabbitRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
         <div className="cash-layer-fixed">
           {cashEffects.map((effect) => (
             <img
@@ -422,6 +457,7 @@ const RabbitRoom = () => {
             />
           ))}
         </div>
+
         <Outlet />
       </div>
     </motion.div>
