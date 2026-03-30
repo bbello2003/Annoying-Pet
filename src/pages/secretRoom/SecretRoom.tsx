@@ -11,6 +11,7 @@ import homeIcon from "../../assets/components/home-icon.png";
 import tabbarImg from "../../assets/components/tabbar.png";
 import endBg from "../../assets/secretRoom/end.png";
 import logoImg from "../../assets/secretRoom/annoying-pet-logo.png";
+import restartBtnImg from "../../assets/secretRoom/restart-button.png";
 
 import w1 from "../../assets/secretRoom/warning-1.png";
 import w2 from "../../assets/secretRoom/warning-2.png";
@@ -32,6 +33,12 @@ const SecretRoom = () => {
 
   const [triggered, setTriggered] = useState<Record<string, boolean>>({});
   const [isEnded, setIsEnded] = useState(false);
+  const [showRestart, setShowRestart] = useState(false);
+
+  const handleRestart = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
@@ -80,7 +87,7 @@ const SecretRoom = () => {
       <div className="secret-scroll-viewport" ref={viewportRef}>
         <div className="secret-content-holder">
           <img src={bgSecret} className="secret-bg-main" alt="background" />
-          
+
           <AnimatePresence>
             {triggered.w3 && (
               <motion.img
@@ -218,23 +225,39 @@ const SecretRoom = () => {
       {/* End Screen Overlay */}
       <AnimatePresence>
         {isEnded && (
-          <motion.div 
+          <motion.div
             className="final-end-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Wrapper สำหรับคุมให้เนื้อหาชิดขอบบนและกว้างเต็มจอ */}
             <div className="end-content-wrapper">
               <img src={endBg} className="end-bg-full" alt="End Background" />
-              
-              <motion.img 
-                src={logoImg} 
+
+              <motion.img
+                src={logoImg}
                 className="end-logo-center"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+                onAnimationComplete={() =>
+                  setTimeout(() => setShowRestart(true), 800)
+                }
               />
+
+              <AnimatePresence>
+                {showRestart && (
+                  <motion.img
+                    src={restartBtnImg}
+                    className="end-restart-btn"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 1 }}
+                    onClick={handleRestart}
+                  />
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
