@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./SquirrelClean.css";
 
-import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
+import { globalCashAudio } from "../lobbyPage/LobbyPage";
 import cleanBg from "../../assets/squirrelRoom/clean-bg.png";
 import allFixedBg from "../../assets/squirrelRoom/clean-all-fixed-background.png";
 import weightLifting from "../../assets/squirrelRoom/weightlifting.png";
@@ -44,6 +44,27 @@ const SquirrelClean = () => {
 
   const [showFinished, setShowFinished] = useState(false);
 
+  useEffect(() => {
+    const assetsToPreload = [
+      weightLifting,
+      shelfDumbell,
+      ball,
+      catherBell,
+      dumbbell,
+      allFixedBg,
+      cashGif,
+    ];
+
+    assetsToPreload.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    if (textStep === 0) {
+      setTimeout(() => setTextStep(1), 1500);
+    }
+  }, []);
+
   const playCashSound = () => {
     if (!globalCashAudio) return;
 
@@ -66,10 +87,10 @@ const SquirrelClean = () => {
   };
 
   const spawnCash = (e: MouseEvent<HTMLElement>) => {
+    playCashSound();
+
     const container = document.querySelector(".clean-content-wrapper");
     if (!container) return;
-
-    playCashSound();
 
     const rect = container.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
@@ -82,12 +103,6 @@ const SquirrelClean = () => {
       setCashEffects((prev) => prev.filter((eff) => eff.id !== id));
     }, 800);
   };
-
-  useEffect(() => {
-    if (textStep === 0) {
-      setTimeout(() => setTextStep(1), 1500);
-    }
-  }, [textStep]);
 
   const handleRepair = (
     e: MouseEvent<HTMLElement>,
@@ -140,7 +155,6 @@ const SquirrelClean = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8 }}
             >
-              {/* squirrel */}
               <img
                 src={squirrelDef}
                 className="clean-squirrel-pos"
@@ -217,7 +231,6 @@ const SquirrelClean = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              {/* home circle button */}
               <motion.div
                 className="clean-home-circle-pos"
                 initial={{ scale: 0 }}
@@ -232,7 +245,6 @@ const SquirrelClean = () => {
           )}
         </AnimatePresence>
 
-        {/* topics text */}
         <AnimatePresence>
           {!showFinished && (
             <motion.img
