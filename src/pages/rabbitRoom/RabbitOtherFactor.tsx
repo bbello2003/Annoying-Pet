@@ -57,9 +57,9 @@ const RabbitOtherFactor = () => {
   const closePopup = () => setActivePopup(null);
 
   const getBgColor = () => {
-    if (isMapPage) return "#b48b8d"; // ถ้าอยู่หน้า Map ให้ใช้สีนี้เสมอ
-    if (activePopup || showFinalSequence) return "#906e70"; // ถ้ามี Popup หรือ Final Seq ให้ใช้สีเข้ม
-    return "#b48b8d"; // สี Default
+    if (isMapPage) return "#b48b8d";
+    if (activePopup || showFinalSequence) return "#906e70";
+    return "#b48b8d";
   };
 
   const handleNextClick = () => {
@@ -68,6 +68,26 @@ const RabbitOtherFactor = () => {
 
   const goToClinic = () => {
     navigate("map");
+  };
+
+  const [popupStatus, setPopupStatus] = useState({
+    pos1: { visible: true, delay: 0.4 },
+    pos2: { visible: true, delay: 0.9 },
+    pos3: { visible: true, delay: 1.4 },
+  });
+
+  const handleSingleSnooze = (pos: "pos1" | "pos2" | "pos3") => {
+    setPopupStatus((prev) => ({
+      ...prev,
+      [pos]: { visible: false, delay: 0.1 },
+    }));
+
+    setTimeout(() => {
+      setPopupStatus((prev) => ({
+        ...prev,
+        [pos]: { ...prev[pos], visible: true },
+      }));
+    }, 300);
   };
 
   return (
@@ -150,50 +170,86 @@ const RabbitOtherFactor = () => {
             <AnimatePresence>
               {showFinalSequence && (
                 <div className="final-sequence-overlay">
-                  <motion.div
-                    className="final-popup pos-1"
-                    initial={{ scale: 0, opacity: 0, y: 50 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <img
-                      src={clinicNotice1}
-                      alt="notice 1"
-                      className="final-window-img"
-                    />
-                    <div className="final-btn-snooze" onClick={goToClinic} />
-                    <div className="final-btn-clinic" onClick={goToClinic} />
-                  </motion.div>
+                  <AnimatePresence mode="wait">
+                    {popupStatus.pos1.visible && (
+                      <motion.div
+                        key="pos1"
+                        className="final-popup pos-1"
+                        initial={{ scale: 0, opacity: 0, y: 50 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        exit={{ scale: 0, opacity: 0, y: 20 }}
+                        transition={{ delay: popupStatus.pos1.delay }}
+                      >
+                        <img
+                          src={clinicNotice1}
+                          className="final-window-img"
+                          alt="1"
+                        />
+                        <div
+                          className="final-btn-snooze"
+                          onClick={() => handleSingleSnooze("pos1")}
+                        />
+                        <div
+                          className="final-btn-clinic"
+                          onClick={goToClinic}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-                  <motion.div
-                    className="final-popup pos-2"
-                    initial={{ scale: 0, opacity: 0, x: -50 }}
-                    animate={{ scale: 1, opacity: 1, x: 0 }}
-                    transition={{ delay: 0.9 }}
-                  >
-                    <img
-                      src={clinicNotice2}
-                      alt="notice 2"
-                      className="final-window-img"
-                    />
-                    <div className="final-btn-snooze" onClick={goToClinic} />
-                    <div className="final-btn-clinic" onClick={goToClinic} />
-                  </motion.div>
+                  <AnimatePresence mode="wait">
+                    {popupStatus.pos2.visible && (
+                      <motion.div
+                        key="pos2"
+                        className="final-popup pos-2"
+                        initial={{ scale: 0, opacity: 0, x: -50 }}
+                        animate={{ scale: 1, opacity: 1, x: 0 }}
+                        exit={{ scale: 0, opacity: 0, x: -20 }}
+                        transition={{ delay: popupStatus.pos2.delay }}
+                      >
+                        <img
+                          src={clinicNotice2}
+                          className="final-window-img"
+                          alt="2"
+                        />
+                        <div
+                          className="final-btn-snooze"
+                          onClick={() => handleSingleSnooze("pos2")}
+                        />
+                        <div
+                          className="final-btn-clinic"
+                          onClick={goToClinic}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-                  <motion.div
-                    className="final-popup pos-3"
-                    initial={{ scale: 0, opacity: 0, y: 50 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    transition={{ delay: 1.4 }}
-                  >
-                    <img
-                      src={clinicNotice3}
-                      alt="notice 3"
-                      className="final-window-img"
-                    />
-                    <div className="final-btn-snooze" onClick={goToClinic} />
-                    <div className="final-btn-clinic" onClick={goToClinic} />
-                  </motion.div>
+                  <AnimatePresence mode="wait">
+                    {popupStatus.pos3.visible && (
+                      <motion.div
+                        key="pos3"
+                        className="final-popup pos-3"
+                        initial={{ scale: 0, opacity: 0, y: 50 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        exit={{ scale: 0, opacity: 0, y: 20 }}
+                        transition={{ delay: popupStatus.pos3.delay }}
+                      >
+                        <img
+                          src={clinicNotice3}
+                          className="final-window-img"
+                          alt="3"
+                        />
+                        <div
+                          className="final-btn-snooze"
+                          onClick={() => handleSingleSnooze("pos3")}
+                        />
+                        <div
+                          className="final-btn-clinic"
+                          onClick={goToClinic}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               )}
             </AnimatePresence>
