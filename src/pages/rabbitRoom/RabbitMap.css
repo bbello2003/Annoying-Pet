@@ -1,25 +1,73 @@
-/* เลเยอร์ลูกที่จะขึ้นมาทับหน้า RabbitOtherFactor ทั้งหมดในกรอบ 16:9 */
 .map-sub-page-overlay {
   position: absolute;
-  inset: 0; /* ทับเต็มพื้นที่ของ rabbit-responsive-container */
-  z-index: 5000; /* ค่าสูงกว่าทุกอย่างในหน้าเดิม */
-  background-color: #b48b8d; /* ป้องกันการเห็นหน้าเก่าแวบๆ ตอนเปลี่ยน */
-  overflow: hidden;
+  inset: 0;
+  z-index: 5000;
+  background-color: #b48b8d;
 }
 
-.map-bg-img {
+.map-content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.map-frame-img,
+.full-img {
   width: 100%;
   height: 100%;
   object-fit: fill;
   display: block;
 }
 
-/* ปุ่ม Next Arrow แปะทับตำแหน่งวงกลมขวาล่าง */
-.map-next-asset {
+.map-window-container {
+  position: absolute;
+  top: 17.2%;
+  left: 7.7%;
+  width: 84.6%;
+  z-index: 5010;
+}
+
+.map-actual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.map-tabs-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 86%;
+  height: 9.3%;
+}
+
+.tab-hitbox {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.map-next-arrow {
   position: absolute;
   bottom: 6.5%;
   right: 4.6%;
   width: 6.5%;
   cursor: pointer;
-  z-index: 5100;
+  z-index: 5020;
+}
+
+.rabbit-end-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 6000;
+}
+
+.map-home-circle {
+  position: absolute;
+  bottom: 6.5%;
+  right: 4.6%;
+  width: 6.5%;
+  cursor: pointer;
+  z-index: 6100;
 }
