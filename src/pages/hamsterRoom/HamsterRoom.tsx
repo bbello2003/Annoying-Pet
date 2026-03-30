@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./HamsterRoom.css";
 
-// Assets
 import bgEmpty from "../../assets/hamsterRoom/bg-empty.png";
 import bgAdoptPage from "../../assets/hamsterRoom/hamster-background.png";
 import homeIcon from "../../assets/components/home-icon.png";
@@ -69,28 +68,37 @@ const HamsterRoom = () => {
   const [showTopic, setShowTopic] = useState(false);
   const [isHamsterRight, setIsHamsterRight] = useState(false);
   const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
+  const cashAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio(moneySound);
+    audio.preload = "auto";
+    audio.load();
+    cashAudioRef.current = audio;
+  }, []);
 
   const currentStep = steps[stepIndex];
 
   const playCashSound = () => {
-    const audio = new Audio(moneySound);
-    audio.volume = 0.5;
+    if (!cashAudioRef.current) return;
+
+    const soundClone = cashAudioRef.current.cloneNode(true) as HTMLAudioElement;
+    soundClone.volume = 0.5;
 
     const startTime = 1;
     const endTime = 2;
 
-    audio.currentTime = startTime;
+    soundClone.currentTime = startTime;
 
     const onTimeUpdate = () => {
-      if (audio.currentTime >= endTime) {
-        audio.pause();
-        audio.removeEventListener("timeupdate", onTimeUpdate);
+      if (soundClone.currentTime >= endTime) {
+        soundClone.pause();
+        soundClone.removeEventListener("timeupdate", onTimeUpdate);
       }
     };
 
-    audio.addEventListener("timeupdate", onTimeUpdate);
-
-    audio.play().catch((err) => console.log("Audio play blocked", err));
+    soundClone.addEventListener("timeupdate", onTimeUpdate);
+    soundClone.play().catch((err) => console.log("Audio play blocked", err));
   };
 
   const triggerNext = () => {
