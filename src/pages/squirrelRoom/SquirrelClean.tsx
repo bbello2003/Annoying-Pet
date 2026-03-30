@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import type { MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./SquirrelClean.css";
@@ -19,10 +20,19 @@ import squirrelDef from "../../assets/squirrelRoom/squirrel-default.png";
 import topic1Text from "../../assets/squirrelRoom/clean-topic-text-1.png";
 import topic2Text from "../../assets/squirrelRoom/clean-topic-text-2.png";
 import homeCircleBtn from "../../assets/components/home-circle-button.png";
+import cashGif from "../../assets/components/cash-gif.gif";
+import moneySound from "../../assets/sounds/money-sound-effect.mp3";
+
+interface CashEffect {
+  id: number;
+  x: number;
+  y: number;
+}
 
 const SquirrelClean = () => {
   const navigate = useNavigate();
   const [textStep, setTextStep] = useState(0);
+  const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
 
   const [repairs, setRepairs] = useState({
     weight: false,
@@ -34,14 +44,54 @@ const SquirrelClean = () => {
 
   const [showFinished, setShowFinished] = useState(false);
 
+  const playCashSound = () => {
+    const audio = new Audio(moneySound);
+    audio.volume = 0.5;
+    const startTime = 1;
+    const endTime = 2;
+    audio.currentTime = startTime;
+
+    const onTimeUpdate = () => {
+      if (audio.currentTime >= endTime) {
+        audio.pause();
+        audio.removeEventListener("timeupdate", onTimeUpdate);
+      }
+    };
+    audio.addEventListener("timeupdate", onTimeUpdate);
+    audio.play().catch((err) => console.log("Audio play blocked", err));
+  };
+
+  const spawnCash = (e: MouseEvent<HTMLElement>) => {
+    const container = document.querySelector(".clean-content-wrapper");
+    if (!container) return;
+
+    playCashSound();
+
+    const rect = container.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+
+    const id = Date.now();
+    setCashEffects((prev) => [...prev, { id, x: xPercent, y: yPercent }]);
+
+    setTimeout(() => {
+      setCashEffects((prev) => prev.filter((eff) => eff.id !== id));
+    }, 800);
+  };
+
   useEffect(() => {
     if (textStep === 0) {
       setTimeout(() => setTextStep(1), 1500);
     }
   }, [textStep]);
 
-  const handleRepair = (key: keyof typeof repairs) => {
-    if (textStep < 1) return;
+  const handleRepair = (
+    e: MouseEvent<HTMLElement>,
+    key: keyof typeof repairs,
+  ) => {
+    if (textStep < 1 || repairs[key]) return;
+
+    spawnCash(e);
     setRepairs((prev) => ({ ...prev, [key]: true }));
   };
 
@@ -95,7 +145,7 @@ const SquirrelClean = () => {
 
               <div
                 className={`repair-item ${repairs.shelf ? "shelf-fixed" : "shelf-messed"}`}
-                onClick={() => handleRepair("shelf")}
+                onClick={(e) => handleRepair(e, "shelf")}
               >
                 <img
                   src={repairs.shelf ? shelfDumbell : shelfDumbellMessed}
@@ -105,14 +155,14 @@ const SquirrelClean = () => {
 
               <div
                 className={`repair-item ${repairs.ball ? "ball-fixed" : "ball-messed"}`}
-                onClick={() => handleRepair("ball")}
+                onClick={(e) => handleRepair(e, "ball")}
               >
                 <img src={repairs.ball ? ball : ballMessed} alt="ball" />
               </div>
 
               <div
                 className={`repair-item ${repairs.kettle ? "kettle-fixed" : "kettle-messed"}`}
-                onClick={() => handleRepair("kettle")}
+                onClick={(e) => handleRepair(e, "kettle")}
               >
                 <img
                   src={repairs.kettle ? catherBell : catherBellMessed}
@@ -122,7 +172,7 @@ const SquirrelClean = () => {
 
               <div
                 className={`repair-item ${repairs.dumbell ? "dumbell-fixed" : "dumbell-messed"}`}
-                onClick={() => handleRepair("dumbell")}
+                onClick={(e) => handleRepair(e, "dumbell")}
               >
                 <img
                   src={repairs.dumbell ? dumbbell : dumbbellMessed}
@@ -132,7 +182,7 @@ const SquirrelClean = () => {
 
               <div
                 className={`repair-item ${repairs.weight ? "weight-fixed" : "weight-messed"}`}
-                onClick={() => handleRepair("weight")}
+                onClick={(e) => handleRepair(e, "weight")}
               >
                 <img
                   src={repairs.weight ? weightLifting : weightLiftingMessed}
@@ -142,6 +192,18 @@ const SquirrelClean = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <div className="cash-effect-layer">
+          {cashEffects.map((effect) => (
+            <img
+              key={effect.id}
+              src={`${cashGif}?a=${effect.id}`}
+              style={{ left: `${effect.x}%`, top: `${effect.y}%` }}
+              className="cash-gif-instance"
+              alt="cash-effect"
+            />
+          ))}
+        </div>
 
         <AnimatePresence>
           {showFinished && (

@@ -16,7 +16,8 @@ import priceWarningImg from "../../assets/hamsterRoom/information-window.png";
 import gadgetTopic from "../../assets/hamsterRoom/gadget-topic-text.png";
 import nextArrow from "../../assets/components/next-arrow.png";
 import homeCircle from "../../assets/components/home-circle-button.png";
-import cashGif from "../../assets/hamsterRoom/cash-gif.gif";
+import cashGif from "../../assets/components/cash-gif.gif";
+import moneySound from "../../assets/sounds/money-sound-effect.mp3";
 
 import step1 from "../../assets/hamsterRoom/ham-step-1.png";
 import step2 from "../../assets/hamsterRoom/ham-step-2.png";
@@ -71,6 +72,27 @@ const HamsterRoom = () => {
 
   const currentStep = steps[stepIndex];
 
+  const playCashSound = () => {
+    const audio = new Audio(moneySound);
+    audio.volume = 0.5;
+
+    const startTime = 1;
+    const endTime = 2;
+
+    audio.currentTime = startTime;
+
+    const onTimeUpdate = () => {
+      if (audio.currentTime >= endTime) {
+        audio.pause();
+        audio.removeEventListener("timeupdate", onTimeUpdate);
+      }
+    };
+
+    audio.addEventListener("timeupdate", onTimeUpdate);
+
+    audio.play().catch((err) => console.log("Audio play blocked", err));
+  };
+
   const triggerNext = () => {
     if (stepIndex < steps.length - 1) {
       setPrevIndex(stepIndex);
@@ -106,6 +128,8 @@ const HamsterRoom = () => {
   const spawnCash = (e: MouseEvent<HTMLElement>) => {
     const container = document.querySelector(".hamster-responsive-container");
     if (!container) return;
+
+    playCashSound();
 
     const rect = container.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;

@@ -135,3 +135,18 @@
   width: 100%;
   height: auto;
 }
+
+.cash-effect-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5000;
+}
+
+.cash-gif-instance {
+  position: absolute;
+  width: 45vw;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
