@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./HamsterRoom.css";
 
-import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
+import { playGlobalCashSound } from "../lobbyPage/LobbyPage";
 import bgEmpty from "../../assets/hamsterRoom/bg-empty.png";
 import bgAdoptPage from "../../assets/hamsterRoom/hamster-background.png";
 import homeIcon from "../../assets/components/home-icon.png";
@@ -71,27 +71,6 @@ const HamsterRoom = () => {
 
   const currentStep = steps[stepIndex];
 
-  const playCashSound = () => {
-    if (!globalCashAudio) return;
-
-    const soundClone = globalCashAudio.cloneNode(true) as HTMLAudioElement;
-    soundClone.volume = 0.5;
-
-    const startTime = 1;
-    const endTime = 2;
-    soundClone.currentTime = startTime;
-
-    const onTimeUpdate = () => {
-      if (soundClone.currentTime >= endTime) {
-        soundClone.pause();
-        soundClone.removeEventListener("timeupdate", onTimeUpdate);
-      }
-    };
-
-    soundClone.addEventListener("timeupdate", onTimeUpdate);
-    soundClone.play().catch((err) => console.log("Audio play blocked", err));
-  };
-
   const triggerNext = () => {
     if (stepIndex < steps.length - 1) {
       setPrevIndex(stepIndex);
@@ -128,7 +107,7 @@ const HamsterRoom = () => {
     const container = document.querySelector(".hamster-responsive-container");
     if (!container) return;
 
-    playCashSound();
+    playGlobalCashSound();
 
     const rect = container.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
@@ -159,7 +138,6 @@ const HamsterRoom = () => {
       animate={{ opacity: 1, backgroundColor: getBgColor() }}
     >
       <div className="hamster-responsive-container">
-        {/* Home Button */}
         <motion.button
           className="home-btn"
           onClick={() => navigate("/lobby")}
@@ -168,13 +146,9 @@ const HamsterRoom = () => {
         >
           <img src={homeIcon} alt="Home" />
         </motion.button>
-
-        {/* Background Layer */}
         <div className="background-layer">
           <img src={bgEmpty} className="img-full" alt="bg" />
         </div>
-
-        {/* UI Elements */}
         <AnimatePresence>
           {isAdopted && (
             <motion.button
@@ -189,7 +163,6 @@ const HamsterRoom = () => {
             </motion.button>
           )}
         </AnimatePresence>
-
         <AnimatePresence>
           {showTopic && stepIndex < 14 && (
             <motion.div
@@ -202,8 +175,6 @@ const HamsterRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Main Character */}
         <AnimatePresence>
           {isAdopted && stepIndex <= 0 && (
             <motion.div
@@ -225,8 +196,6 @@ const HamsterRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Sequence Layer */}
         {isAdopted && stepIndex >= 0 && (
           <div className="sequence-layer">
             {prevIndex >= 0 && (
@@ -238,7 +207,6 @@ const HamsterRoom = () => {
                 />
               </div>
             )}
-
             <AnimatePresence mode="popLayout">
               <motion.div
                 key={stepIndex}
@@ -253,14 +221,12 @@ const HamsterRoom = () => {
                   className="img-full"
                   alt={`step-${stepIndex}`}
                 />
-
                 {currentStep.hasButton && (
                   <div
                     className={`invisible-step-btn ${currentStep.btnClass}`}
                     onClick={(e) => handleStepClick(e, stepIndex)}
                   />
                 )}
-
                 {currentStep.showNextArrow && (
                   <motion.img
                     src={nextArrow}
@@ -270,7 +236,6 @@ const HamsterRoom = () => {
                     whileTap={{ scale: 1 }}
                   />
                 )}
-
                 {currentStep.showHomeCircle && (
                   <motion.img
                     src={homeCircle}
@@ -284,8 +249,6 @@ const HamsterRoom = () => {
             </AnimatePresence>
           </div>
         )}
-
-        {/* Cash Effects */}
         <div className="cash-effect-layer">
           {cashEffects.map((effect) => (
             <img
@@ -297,8 +260,6 @@ const HamsterRoom = () => {
             />
           ))}
         </div>
-
-        {/* Overlays */}
         <AnimatePresence>
           {!isAdopted && !showNoti && (
             <motion.div className="adopt-overlay" exit={{ opacity: 0 }}>
@@ -314,8 +275,6 @@ const HamsterRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Modals (Noti & Price Info) */}
         <AnimatePresence>
           {showNoti && (
             <motion.div
@@ -331,7 +290,6 @@ const HamsterRoom = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
         <AnimatePresence>
           {showPriceInfo && (
             <motion.div

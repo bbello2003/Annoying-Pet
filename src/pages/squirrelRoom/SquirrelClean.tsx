@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./SquirrelClean.css";
 
-import { globalCashAudio } from "../lobbyPage/LobbyPage";
+import { playGlobalCashSound } from "../lobbyPage/LobbyPage";
 import cleanBg from "../../assets/squirrelRoom/clean-bg.png";
 import allFixedBg from "../../assets/squirrelRoom/clean-all-fixed-background.png";
 import weightLifting from "../../assets/squirrelRoom/weightlifting.png";
@@ -45,7 +45,7 @@ const SquirrelClean = () => {
   const [showFinished, setShowFinished] = useState(false);
 
   useEffect(() => {
-    const assetsToPreload = [
+    [
       weightLifting,
       shelfDumbell,
       ball,
@@ -53,9 +53,7 @@ const SquirrelClean = () => {
       dumbbell,
       allFixedBg,
       cashGif,
-    ];
-
-    assetsToPreload.forEach((src) => {
+    ].forEach((src) => {
       const img = new Image();
       img.src = src;
     });
@@ -65,29 +63,8 @@ const SquirrelClean = () => {
     }
   }, []);
 
-  const playCashSound = () => {
-    if (!globalCashAudio) return;
-
-    const soundClone = globalCashAudio.cloneNode(true) as HTMLAudioElement;
-    soundClone.volume = 0.5;
-
-    const startTime = 1;
-    const endTime = 2;
-    soundClone.currentTime = startTime;
-
-    const onTimeUpdate = () => {
-      if (soundClone.currentTime >= endTime) {
-        soundClone.pause();
-        soundClone.removeEventListener("timeupdate", onTimeUpdate);
-      }
-    };
-
-    soundClone.addEventListener("timeupdate", onTimeUpdate);
-    soundClone.play().catch((err) => console.log("Audio play blocked", err));
-  };
-
   const spawnCash = (e: MouseEvent<HTMLElement>) => {
-    playCashSound();
+    playGlobalCashSound();
 
     const container = document.querySelector(".clean-content-wrapper");
     if (!container) return;
@@ -109,23 +86,15 @@ const SquirrelClean = () => {
     key: keyof typeof repairs,
   ) => {
     if (textStep < 1 || repairs[key]) return;
-
     spawnCash(e);
     setRepairs((prev) => ({ ...prev, [key]: true }));
   };
 
-  const isAllFixed =
-    repairs.weight &&
-    repairs.shelf &&
-    repairs.ball &&
-    repairs.kettle &&
-    repairs.dumbell;
+  const isAllFixed = Object.values(repairs).every((val) => val === true);
 
   useEffect(() => {
     if (isAllFixed) {
-      const timer = setTimeout(() => {
-        setShowFinished(true);
-      }, 500);
+      const timer = setTimeout(() => setShowFinished(true), 500);
       return () => clearTimeout(timer);
     }
   }, [isAllFixed]);
@@ -147,7 +116,6 @@ const SquirrelClean = () => {
           className="clean-main-bg"
           alt="bg"
         />
-
         <AnimatePresence>
           {!showFinished && (
             <motion.div
@@ -160,7 +128,6 @@ const SquirrelClean = () => {
                 className="clean-squirrel-pos"
                 alt="squirrel-def"
               />
-
               <div
                 className={`repair-item ${repairs.shelf ? "shelf-fixed" : "shelf-messed"}`}
                 onClick={(e) => handleRepair(e, "shelf")}
@@ -170,14 +137,12 @@ const SquirrelClean = () => {
                   alt="shelf"
                 />
               </div>
-
               <div
                 className={`repair-item ${repairs.ball ? "ball-fixed" : "ball-messed"}`}
                 onClick={(e) => handleRepair(e, "ball")}
               >
                 <img src={repairs.ball ? ball : ballMessed} alt="ball" />
               </div>
-
               <div
                 className={`repair-item ${repairs.kettle ? "kettle-fixed" : "kettle-messed"}`}
                 onClick={(e) => handleRepair(e, "kettle")}
@@ -187,7 +152,6 @@ const SquirrelClean = () => {
                   alt="kettle"
                 />
               </div>
-
               <div
                 className={`repair-item ${repairs.dumbell ? "dumbell-fixed" : "dumbell-messed"}`}
                 onClick={(e) => handleRepair(e, "dumbell")}
@@ -197,7 +161,6 @@ const SquirrelClean = () => {
                   alt="dumbell"
                 />
               </div>
-
               <div
                 className={`repair-item ${repairs.weight ? "weight-fixed" : "weight-messed"}`}
                 onClick={(e) => handleRepair(e, "weight")}
@@ -210,7 +173,6 @@ const SquirrelClean = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
         <div className="cash-effect-layer">
           {cashEffects.map((effect) => (
             <img
@@ -222,7 +184,6 @@ const SquirrelClean = () => {
             />
           ))}
         </div>
-
         <AnimatePresence>
           {showFinished && (
             <motion.div
@@ -244,7 +205,6 @@ const SquirrelClean = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
         <AnimatePresence>
           {!showFinished && (
             <motion.img
