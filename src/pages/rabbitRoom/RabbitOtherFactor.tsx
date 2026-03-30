@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitOtherFactor.css";
@@ -18,6 +18,12 @@ import foodWindow from "../../assets/rabbitRoom/food-window.png";
 import clinicNotice1 from "../../assets/rabbitRoom/clinic-notice-1.png";
 import clinicNotice2 from "../../assets/rabbitRoom/clinic-notice-2.png";
 import clinicNotice3 from "../../assets/rabbitRoom/clinic-notice-3.png";
+import geneticElement from "../../assets/rabbitRoom/genetic-element.png";
+import foodElement1 from "../../assets/rabbitRoom/food-element-1.png";
+import foodElement2 from "../../assets/rabbitRoom/food-element-2.png";
+import foodElement3 from "../../assets/rabbitRoom/food-element-3.png";
+import stressElement1 from "../../assets/rabbitRoom/stress-element-1.png";
+import stressElement2 from "../../assets/rabbitRoom/stress-element-2.png";
 
 const RabbitOtherFactor = () => {
   const navigate = useNavigate();
@@ -25,6 +31,19 @@ const RabbitOtherFactor = () => {
   const [activePopup, setActivePopup] = useState<string | null>(null);
   const [showFinalSequence, setShowFinalSequence] = useState(false);
   const isMapPage = location.pathname.includes("map");
+  const [foodIndex, setFoodIndex] = useState(0);
+  const foodImages = [foodElement1, foodElement2, foodElement3];
+
+  useEffect(() => {
+    let interval: any;
+    if (activePopup === "food") {
+      setFoodIndex(0);
+      interval = setInterval(() => {
+        setFoodIndex((prev) => (prev + 1) % 3);
+      }, 500);
+    }
+    return () => clearInterval(interval);
+  }, [activePopup]);
 
   const folders = [
     {
@@ -90,6 +109,59 @@ const RabbitOtherFactor = () => {
     }, 300);
   };
 
+  const renderSpecialContent = () => {
+    switch (activePopup) {
+      case "genetic":
+        return (
+          <div className="special-overlay genetic-area">
+            <motion.img
+              src={geneticElement}
+              className="genetic-scroll-img"
+              animate={{ y: ["0%", "-39%", "-39%", "0%"] }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                times: [0, 0.4, 0.7, 1],
+              }}
+            />
+          </div>
+        );
+      case "food":
+        return (
+          <div className="special-overlay food-area">
+            <motion.img
+              key={foodIndex}
+              src={foodImages[foodIndex]}
+              className="food-anim-img"
+              transition={{ duration: 0 }}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+            />
+          </div>
+        );
+      case "stress":
+        return (
+          <div className="special-overlay stress-area">
+            <img src={stressElement2} className="stress-back-img" />
+            <motion.img
+              src={stressElement1}
+              className="stress-front-img"
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                times: [0, 0.3, 1],
+                ease: "easeInOut",
+              }}
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <motion.div
       className="factor-container-full"
@@ -147,6 +219,7 @@ const RabbitOtherFactor = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  onClick={closePopup}
                 >
                   <motion.div
                     className="popup-content-wrapper"
@@ -160,6 +233,9 @@ const RabbitOtherFactor = () => {
                       className="window-img-asset"
                       alt="popup"
                     />
+
+                    {renderSpecialContent()}
+
                     <div className="close-x-trigger" onClick={closePopup} />
                   </motion.div>
                 </motion.div>
