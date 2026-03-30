@@ -30,6 +30,11 @@ const SugarGliderForbiddenFood = () => {
     digest: digestOverlay,
   };
 
+  const handleBackToLobby = () => {
+    localStorage.setItem("sugar_completed", "true");
+    navigate("/lobby");
+  };
+
   return (
     <motion.div
       className={`forbidden-page ${isSummaryVisible ? "summary-bg-active" : ""}`}
@@ -101,7 +106,7 @@ const SugarGliderForbiddenFood = () => {
             <motion.button
               key="home-btn"
               className="forbidden-home-circle-btn"
-              onClick={() => navigate("/lobby")}
+              onClick={handleBackToLobby}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

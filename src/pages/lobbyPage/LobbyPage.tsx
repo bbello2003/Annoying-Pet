@@ -74,7 +74,18 @@ const LobbyPage = () => {
   const [hoveredRoom, setHoveredRoom] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const completedRooms = [
+    localStorage.getItem("rabbit_completed"),
+    localStorage.getItem("hamster_completed"),
+    localStorage.getItem("hedgehog_completed"),
+    localStorage.getItem("sugar_completed"),
+    localStorage.getItem("squirrel_completed"),
+  ];
+
+  const isAllCompleted = completedRooms.every((room) => room === "true");
+
   const handleRoomClick = (id: string) => {
+    if (id === "secret" && !isAllCompleted) return;
     navigate(`/lobby/${id}`);
   };
 
@@ -84,29 +95,34 @@ const LobbyPage = () => {
         <img src={lobbyBg} className="full-bg" alt="Lobby Background" />
         <img src={exploreTopic} className="lobby-header" alt="Header Title" />
 
-        {ROOMS_CONFIG.map((room) => (
-          <div
-            key={room.id}
-            className="room-item"
-            style={{
-              top: room.top,
-              left: room.left,
-              width: room.size,
-            }}
-            onMouseEnter={() => setHoveredRoom(room.id)}
-            onMouseLeave={() => setHoveredRoom(null)}
-            onClick={() => handleRoomClick(room.id)}
-          >
-            <motion.img
-              src={hoveredRoom === room.id ? room.act : room.def}
-              alt={room.id}
-              className="room-img"
-              initial={false}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
-            />
-          </div>
-        ))}
+        {ROOMS_CONFIG.map((room) => {
+          const isLockedSecret = room.id === "secret" && !isAllCompleted;
+
+          return (
+            <div
+              key={room.id}
+              className={`room-item ${isLockedSecret ? "is-locked" : ""}`}
+              style={{
+                top: room.top,
+                left: room.left,
+                width: room.size,
+                cursor: isLockedSecret ? "not-allowed" : "pointer",
+              }}
+              onMouseEnter={() => setHoveredRoom(room.id)}
+              onMouseLeave={() => setHoveredRoom(null)}
+              onClick={() => handleRoomClick(room.id)}
+            >
+              <motion.img
+                src={hoveredRoom === room.id ? room.act : room.def}
+                alt={room.id}
+                className="room-img"
+                initial={false}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+            </div>
+          );
+        })}
       </div>
 
       <Outlet />

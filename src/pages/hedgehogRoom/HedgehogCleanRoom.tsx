@@ -61,6 +61,11 @@ const HedgehogCleanRoom = () => {
     return "#8caeda";
   };
 
+  const handleBackToLobby = () => {
+    localStorage.setItem("hedgehog_completed", "true");
+    navigate("/lobby");
+  };
+
   useEffect(() => {
     if (currentStep?.autoNext) {
       const timer = setTimeout(triggerNext, 1200);
@@ -136,7 +141,7 @@ const HedgehogCleanRoom = () => {
                 <motion.img
                   src={homeCircle}
                   className="hedgehog-clean-home-circle"
-                  onClick={() => navigate("/lobby")}
+                  onClick={handleBackToLobby}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 1 }}
                 />

@@ -63,3 +63,12 @@
   filter: brightness(1) !important;
   z-index: 20;
 }
+
+.room-item.is-locked {
+  filter: none !important;
+}
+
+.room-item.is-locked:hover {
+  cursor: not-allowed;
+  transform: translate(-50%, -50%) scale(1);
+}

@@ -50,6 +50,11 @@ const SquirrelClean = () => {
     repairs.kettle &&
     repairs.dumbell;
 
+  const handleBackToLobby = () => {
+    localStorage.setItem("squirrel_completed", "true");
+    navigate("/lobby");
+  };
+
   return (
     <motion.div
       className={`clean-page-container ${isAllFixed ? "is-finished" : ""}`}
@@ -113,7 +118,7 @@ const SquirrelClean = () => {
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 1 }}
-                onClick={() => navigate("/lobby")}
+                onClick={handleBackToLobby}
               >
                 <img src={homeCircleBtn} alt="Home" />
               </motion.div>

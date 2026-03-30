@@ -63,7 +63,7 @@
   display: block;
 }
 
-.tab-group {
+.sugar-tab-group {
   position: absolute;
   top: 0;
   width: 34.3%;
@@ -73,7 +73,7 @@
   z-index: 1001;
 }
 
-.tab-hitbox {
+.sugar-tab-hitbox {
   flex: 1;
   cursor: pointer;
 }

@@ -26,6 +26,11 @@ const RabbitMap = () => {
     return mapDefault;
   };
 
+  const handleBackToLobby = () => {
+    localStorage.setItem("rabbit_completed", "true");
+    navigate("/lobby");
+  };
+
   return (
     <motion.div
       className="map-sub-page-overlay"
@@ -79,7 +84,7 @@ const RabbitMap = () => {
             <motion.img
               src={homeCircle}
               className="map-home-circle"
-              onClick={() => navigate("/lobby")}
+              onClick={handleBackToLobby}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 1 }}
             />

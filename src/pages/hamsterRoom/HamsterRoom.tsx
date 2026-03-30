@@ -124,6 +124,11 @@ const HamsterRoom = () => {
     triggerNext();
   };
 
+  const handleBackToLobby = () => {
+    localStorage.setItem("hamster_completed", "true");
+    navigate("/lobby");
+  };
+
   return (
     <motion.div
       className="hamster-room-overlay"
@@ -247,7 +252,7 @@ const HamsterRoom = () => {
                   <motion.img
                     src={homeCircle}
                     className="home-circle-btn"
-                    onClick={() => navigate("/lobby")}
+                    onClick={handleBackToLobby}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 1 }}
                   />

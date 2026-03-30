@@ -67,17 +67,17 @@ const SugarGliderFoodStat = () => {
             />
           ))}
 
-          <div className="tab-group">
+          <div className="sugar-tab-group">
             <div
-              className="tab-hitbox"
+              className="sugar-tab-hitbox"
               onClick={() => setActiveTab("protein")}
             ></div>
             <div
-              className="tab-hitbox"
+              className="sugar-tab-hitbox"
               onClick={() => setActiveTab("fruit")}
             ></div>
             <div
-              className="tab-hitbox"
+              className="sugar-tab-hitbox"
               onClick={() => setActiveTab("vegetable")}
             ></div>
           </div>
