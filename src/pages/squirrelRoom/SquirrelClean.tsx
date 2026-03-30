@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,8 @@ const SquirrelClean = () => {
   const [textStep, setTextStep] = useState(0);
   const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
 
+  const cashAudioRef = useRef<HTMLAudioElement | null>(null);
+
   const [repairs, setRepairs] = useState({
     weight: false,
     shelf: false,
@@ -44,21 +46,32 @@ const SquirrelClean = () => {
 
   const [showFinished, setShowFinished] = useState(false);
 
-  const playCashSound = () => {
+  useEffect(() => {
     const audio = new Audio(moneySound);
-    audio.volume = 0.5;
+    audio.preload = "auto";
+    audio.load();
+    cashAudioRef.current = audio;
+  }, []);
+
+  const playCashSound = () => {
+    if (!cashAudioRef.current) return;
+
+    const soundClone = cashAudioRef.current.cloneNode(true) as HTMLAudioElement;
+    soundClone.volume = 0.5;
+
     const startTime = 1;
     const endTime = 2;
-    audio.currentTime = startTime;
+    soundClone.currentTime = startTime;
 
     const onTimeUpdate = () => {
-      if (audio.currentTime >= endTime) {
-        audio.pause();
-        audio.removeEventListener("timeupdate", onTimeUpdate);
+      if (soundClone.currentTime >= endTime) {
+        soundClone.pause();
+        soundClone.removeEventListener("timeupdate", onTimeUpdate);
       }
     };
-    audio.addEventListener("timeupdate", onTimeUpdate);
-    audio.play().catch((err) => console.log("Audio play blocked", err));
+
+    soundClone.addEventListener("timeupdate", onTimeUpdate);
+    soundClone.play().catch((err) => console.log("Audio play blocked", err));
   };
 
   const spawnCash = (e: MouseEvent<HTMLElement>) => {

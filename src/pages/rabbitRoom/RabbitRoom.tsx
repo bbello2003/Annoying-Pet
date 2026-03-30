@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitRoom.css";
@@ -49,26 +49,44 @@ const RabbitRoom = () => {
   const [isHealed, setIsHealed] = useState(false);
   const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
 
+  const cashAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio(moneySound);
+    audio.preload = "auto";
+    audio.load();
+    cashAudioRef.current = audio;
+  }, []);
+
   const handleAdopt = () => setIsAdopted(true);
 
   const playCashSound = () => {
-    const audio = new Audio(moneySound);
-    audio.volume = 0.5;
-    audio.currentTime = 1;
+    if (!cashAudioRef.current) return;
+
+    const soundClone = cashAudioRef.current.cloneNode(true) as HTMLAudioElement;
+    soundClone.volume = 0.5;
+
+    const startTime = 1;
+    const endTime = 2;
+    soundClone.currentTime = startTime;
+
     const onTimeUpdate = () => {
-      if (audio.currentTime >= 2) {
-        audio.pause();
-        audio.removeEventListener("timeupdate", onTimeUpdate);
+      if (soundClone.currentTime >= endTime) {
+        soundClone.pause();
+        soundClone.removeEventListener("timeupdate", onTimeUpdate);
       }
     };
-    audio.addEventListener("timeupdate", onTimeUpdate);
-    audio.play().catch(() => {});
+
+    soundClone.addEventListener("timeupdate", onTimeUpdate);
+    soundClone.play().catch((err) => console.log("Audio play blocked", err));
   };
 
   const spawnCashAtSyringe = (info: any) => {
     const container = document.querySelector(".rabbit-responsive-container");
     if (!container) return;
+
     playCashSound();
+
     const rect = container.getBoundingClientRect();
     const xPercent = ((info.point.x - rect.left) / rect.width) * 100;
     const yPercent = ((info.point.y - rect.top) / rect.height) * 100;
