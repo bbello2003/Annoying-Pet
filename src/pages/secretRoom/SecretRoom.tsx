@@ -75,7 +75,7 @@ const SecretRoom = () => {
       <div className="fixed-tabbar-header">
         <img src={tabbarImg} className="tabbar-bg" alt="tabbar" />
         <motion.button
-          className="rabbit-home-btn"
+          className="secret-home-btn"
           onClick={() => navigate("/lobby")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 1 }}
