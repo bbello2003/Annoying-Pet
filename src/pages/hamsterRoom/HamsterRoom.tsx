@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import type { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./HamsterRoom.css";
 
+import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
 import bgEmpty from "../../assets/hamsterRoom/bg-empty.png";
 import bgAdoptPage from "../../assets/hamsterRoom/hamster-background.png";
 import homeIcon from "../../assets/components/home-icon.png";
@@ -16,7 +17,6 @@ import gadgetTopic from "../../assets/hamsterRoom/gadget-topic-text.png";
 import nextArrow from "../../assets/components/next-arrow.png";
 import homeCircle from "../../assets/components/home-circle-button.png";
 import cashGif from "../../assets/components/cash-gif.gif";
-import moneySound from "../../assets/sounds/money-sound-effect.mp3";
 
 import step1 from "../../assets/hamsterRoom/ham-step-1.png";
 import step2 from "../../assets/hamsterRoom/ham-step-2.png";
@@ -68,26 +68,17 @@ const HamsterRoom = () => {
   const [showTopic, setShowTopic] = useState(false);
   const [isHamsterRight, setIsHamsterRight] = useState(false);
   const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
-  const cashAudioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    const audio = new Audio(moneySound);
-    audio.preload = "auto";
-    audio.load();
-    cashAudioRef.current = audio;
-  }, []);
 
   const currentStep = steps[stepIndex];
 
   const playCashSound = () => {
-    if (!cashAudioRef.current) return;
+    if (!globalCashAudio) return;
 
-    const soundClone = cashAudioRef.current.cloneNode(true) as HTMLAudioElement;
+    const soundClone = globalCashAudio.cloneNode(true) as HTMLAudioElement;
     soundClone.volume = 0.5;
 
     const startTime = 1;
     const endTime = 2;
-
     soundClone.currentTime = startTime;
 
     const onTimeUpdate = () => {

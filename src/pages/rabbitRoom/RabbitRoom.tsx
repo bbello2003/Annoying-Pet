@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitRoom.css";
 
+import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
 import homeIcon from "../../assets/components/home-icon.png";
 import adoptBtnImg from "../../assets/components/adopt-button.png";
 import clickIcon from "../../assets/components/click-icon.png";
@@ -26,7 +27,6 @@ import blood40 from "../../assets/rabbitRoom/blood-40.png";
 import blood60 from "../../assets/rabbitRoom/blood-60.png";
 import blood80 from "../../assets/rabbitRoom/blood-80.png";
 import cashGif from "../../assets/components/cash-gif.gif";
-import moneySound from "../../assets/sounds/money-sound-effect.mp3";
 
 interface CashEffect {
   id: number;
@@ -49,21 +49,12 @@ const RabbitRoom = () => {
   const [isHealed, setIsHealed] = useState(false);
   const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
 
-  const cashAudioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    const audio = new Audio(moneySound);
-    audio.preload = "auto";
-    audio.load();
-    cashAudioRef.current = audio;
-  }, []);
-
   const handleAdopt = () => setIsAdopted(true);
 
   const playCashSound = () => {
-    if (!cashAudioRef.current) return;
+    if (!globalCashAudio) return;
 
-    const soundClone = cashAudioRef.current.cloneNode(true) as HTMLAudioElement;
+    const soundClone = globalCashAudio.cloneNode(true) as HTMLAudioElement;
     soundClone.volume = 0.5;
 
     const startTime = 1;

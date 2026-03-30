@@ -18,6 +18,11 @@ import sugarAct from "../../assets/lobbyPage/sugarGlider-room-food.png";
 import secretDef from "../../assets/lobbyPage/secret-room-default.png";
 import secretAct from "../../assets/lobbyPage/secret-room-code.png";
 import exploreTopic from "../../assets/lobbyPage/explore-topic.png";
+import moneySound from "../../assets/sounds/money-sound-effect.mp3";
+
+export const globalCashAudio = new Audio(moneySound);
+globalCashAudio.preload = "auto";
+globalCashAudio.load();
 
 const ROOMS_CONFIG = [
   {

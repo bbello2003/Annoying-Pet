@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import type { MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./SquirrelClean.css";
 
+import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
 import cleanBg from "../../assets/squirrelRoom/clean-bg.png";
 import allFixedBg from "../../assets/squirrelRoom/clean-all-fixed-background.png";
 import weightLifting from "../../assets/squirrelRoom/weightlifting.png";
@@ -21,7 +22,6 @@ import topic1Text from "../../assets/squirrelRoom/clean-topic-text-1.png";
 import topic2Text from "../../assets/squirrelRoom/clean-topic-text-2.png";
 import homeCircleBtn from "../../assets/components/home-circle-button.png";
 import cashGif from "../../assets/components/cash-gif.gif";
-import moneySound from "../../assets/sounds/money-sound-effect.mp3";
 
 interface CashEffect {
   id: number;
@@ -34,8 +34,6 @@ const SquirrelClean = () => {
   const [textStep, setTextStep] = useState(0);
   const [cashEffects, setCashEffects] = useState<CashEffect[]>([]);
 
-  const cashAudioRef = useRef<HTMLAudioElement | null>(null);
-
   const [repairs, setRepairs] = useState({
     weight: false,
     shelf: false,
@@ -46,17 +44,10 @@ const SquirrelClean = () => {
 
   const [showFinished, setShowFinished] = useState(false);
 
-  useEffect(() => {
-    const audio = new Audio(moneySound);
-    audio.preload = "auto";
-    audio.load();
-    cashAudioRef.current = audio;
-  }, []);
-
   const playCashSound = () => {
-    if (!cashAudioRef.current) return;
+    if (!globalCashAudio) return;
 
-    const soundClone = cashAudioRef.current.cloneNode(true) as HTMLAudioElement;
+    const soundClone = globalCashAudio.cloneNode(true) as HTMLAudioElement;
     soundClone.volume = 0.5;
 
     const startTime = 1;
