@@ -14,6 +14,7 @@ import HamsterRoom from "./pages/hamsterRoom/HamsterRoom";
 import HedgehogRoom from "./pages/hedgehogRoom/HedgehogRoom";
 import HedgehogCleanRoom from "./pages/hedgehogRoom/HedgehogCleanRoom";
 import RabbitRoom from "./pages/rabbitRoom/RabbitRoom";
+import RabbitOtherFactor from "./pages/rabbitRoom/RabbitOtherFactor";
 import SquirrelRoom from "./pages/squirrelRoom/SquirrelRoom";
 import SquirrelBehavior from "./pages/squirrelRoom/SquirrelBehavior";
 import SquirrelSwitch from "./pages/squirrelRoom/SquirrelSwitch";
@@ -41,7 +42,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               </Route>
             </Route>
           </Route>
-          <Route path="rabbit" element={<RabbitRoom />} />
+          <Route path="rabbit" element={<RabbitRoom />}>
+            <Route path="factor" element={<RabbitOtherFactor />} />
+          </Route>
           <Route path="hamster" element={<HamsterRoom />} />
           <Route path="squirrel" element={<SquirrelRoom />}>
             <Route path="behavior" element={<SquirrelBehavior />}>

@@ -3,36 +3,82 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitRoom.css";
 
-import bgAdoptPage from "../../assets/rabbitRoom/rabbit-background.png";
-import bgMain from "../../assets/rabbitRoom/bg-main.png";
-import rabbitMain from "../../assets/rabbitRoom/rabbit.png";
 import homeIcon from "../../assets/components/home-icon.png";
 import adoptBtnImg from "../../assets/components/adopt-button.png";
+import clickIcon from "../../assets/components/click-icon.png";
+import bgAdoptPage from "../../assets/rabbitRoom/rabbit-background.png";
+import bgMain from "../../assets/rabbitRoom/bg-main.png";
+import bgWindow from "../../assets/rabbitRoom/bg-window.png";
+import bgRabbitPlayed from "../../assets/rabbitRoom/bg-rabbit-played.png";
+import bgRabbitSick from "../../assets/rabbitRoom/bg-rabbit-sick.png";
+import bgBlood100 from "../../assets/rabbitRoom/bg-blood-100.png";
+import rabbitMain from "../../assets/rabbitRoom/rabbit.png";
 import cupboardClose from "../../assets/rabbitRoom/cupboard-close.png";
 import cupboardOpen from "../../assets/rabbitRoom/cupboard-open.png";
 import topicMain from "../../assets/rabbitRoom/topic-main.png";
-import bgWindow from "../../assets/rabbitRoom/bg-window.png";
 import windowImg from "../../assets/rabbitRoom/window.png";
-import clickIcon from "../../assets/components/click-icon.png";
+import warningWindow from "../../assets/rabbitRoom/warning-window.png";
+import rabbitHeal1 from "../../assets/rabbitRoom/rabbit-heal-1.png";
+import syringeImg from "../../assets/rabbitRoom/syringe.png";
+import nextFactorBtnImg from "../../assets/rabbitRoom/next-factor-button.png";
+import blood20 from "../../assets/rabbitRoom/blood-20.png";
+import blood40 from "../../assets/rabbitRoom/blood-40.png";
+import blood60 from "../../assets/rabbitRoom/blood-60.png";
+import blood80 from "../../assets/rabbitRoom/blood-80.png";
 
 const RabbitRoom = () => {
   const navigate = useNavigate();
+
   const [isAdopted, setIsAdopted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showWindowLayer, setShowWindowLayer] = useState(false);
   const [isWindowHovered, setIsWindowHovered] = useState(false);
+  const [isWindowDropped, setIsWindowDropped] = useState(false);
+  const [showSickPage, setShowSickPage] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const [showHealPage, setShowHealPage] = useState(false);
+  const [bloodLevel, setBloodLevel] = useState(20);
+  const [isHealed, setIsHealed] = useState(false);
 
-  const handleAdopt = () => {
-    setIsAdopted(true);
-  };
+  const handleAdopt = () => setIsAdopted(true);
 
   const handleCarrotClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowWindowLayer(true);
   };
 
-  const handleWindowTriggerClick = () => {
-    console.log("Next Step after window dropped!");
+  const handleWindowTriggerClick = () => setIsWindowDropped(true);
+
+  const handleNextStepClick = () => {
+    setShowSickPage(true);
+    setTimeout(() => setShowWarning(true), 1500);
+  };
+
+  const handleConfirmWarning = () => {
+    setShowWarning(false);
+    setShowHealPage(true);
+  };
+
+  const handleSyringeDragEnd = (_: any, info: any) => {
+    if (info.offset.x >= 115 && bloodLevel < 100) {
+      setBloodLevel((prev) => {
+        if (prev === 20) return 40;
+        if (prev === 40) return 60;
+        if (prev === 60) return 80;
+        if (prev === 80) {
+          setIsHealed(true);
+          return 100;
+        }
+        return 80;
+      });
+    }
+  };
+
+  const getBloodImg = () => {
+    if (bloodLevel === 20) return blood20;
+    if (bloodLevel === 40) return blood40;
+    if (bloodLevel === 60) return blood60;
+    return blood80;
   };
 
   return (
@@ -53,7 +99,7 @@ const RabbitRoom = () => {
           <img src={homeIcon} alt="Home" />
         </motion.button>
 
-        {/* 1. Main Room Layer */}
+        {/* Main Room Layer */}
         <AnimatePresence mode="popLayout">
           {isAdopted && !showWindowLayer && (
             <motion.div
@@ -62,7 +108,7 @@ const RabbitRoom = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               style={{ zIndex: 10 }}
             >
               <img src={bgMain} className="rabbit-img-full" alt="bg-main" />
@@ -71,7 +117,12 @@ const RabbitRoom = () => {
                 className="rabbit-char-container"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15, delay: 0.2 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 15,
+                  delay: 0.2,
+                }}
               >
                 <img
                   src={rabbitMain}
@@ -98,18 +149,18 @@ const RabbitRoom = () => {
                 )}
               </div>
 
-              <motion.div className="rabbit-topic-container">
+              <div className="rabbit-topic-container">
                 <img
                   src={topicMain}
                   className="rabbit-topic-img"
                   alt="Topic Health"
                 />
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* 2. Window Layer */}
+        {/* Window & Sequence Layers */}
         <AnimatePresence mode="popLayout">
           {showWindowLayer && (
             <motion.div
@@ -118,20 +169,28 @@ const RabbitRoom = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               style={{ zIndex: 100 }}
             >
               <img src={bgWindow} className="rabbit-img-full" alt="bg-window" />
 
               <motion.div
                 className="rabbit-window-container"
-                onMouseEnter={() => setIsWindowHovered(true)}
+                onMouseEnter={() =>
+                  !isWindowDropped && setIsWindowHovered(true)
+                }
                 onMouseLeave={() => setIsWindowHovered(false)}
                 onClick={handleWindowTriggerClick}
-                animate={{
-                  rotate: isWindowHovered ? -15 : 0,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                animate={
+                  isWindowDropped
+                    ? { y: 1000, rotate: 20, opacity: 0 }
+                    : { rotate: isWindowHovered ? -15 : 0 }
+                }
+                transition={
+                  isWindowDropped
+                    ? { duration: 0.7, ease: "easeIn" }
+                    : { type: "spring", stiffness: 300, damping: 20 }
+                }
               >
                 <img
                   src={windowImg}
@@ -139,23 +198,192 @@ const RabbitRoom = () => {
                   alt="Window"
                 />
                 <AnimatePresence>
-                  {!isWindowHovered && (
+                  {!isWindowHovered && !isWindowDropped && (
                     <motion.img
                       src={clickIcon}
                       className="window-click-icon"
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.5 }}
-                      alt="Click here"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
                     />
                   )}
                 </AnimatePresence>
               </motion.div>
+
+              {/* Played Layer */}
+              <AnimatePresence>
+                {isWindowDropped && (
+                  <motion.div
+                    className="played-layer-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      delay: 0.3,
+                      duration: 0.6,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <img
+                      src={bgRabbitPlayed}
+                      className="rabbit-img-full"
+                      alt="Played"
+                    />
+                    <div
+                      className="next-step-trigger"
+                      onClick={handleNextStepClick}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Sick Layer */}
+              <AnimatePresence>
+                {showSickPage && (
+                  <motion.div
+                    className="sick-layer-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                    style={{ zIndex: 140 }}
+                  >
+                    <img
+                      src={bgRabbitSick}
+                      className="rabbit-img-full"
+                      alt="Sick"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Warning Modal */}
+              <AnimatePresence>
+                {showWarning && (
+                  <motion.div
+                    className="warning-overlay"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    style={{ zIndex: 150 }}
+                  >
+                    <motion.div
+                      className="warning-container"
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.5, opacity: 0 }}
+                      transition={{
+                        type: "spring",
+                        damping: 15,
+                        stiffness: 300,
+                      }}
+                    >
+                      <img
+                        src={warningWindow}
+                        className="warning-img"
+                        alt="Warning"
+                      />
+                      <div
+                        className="warning-confirm-btn"
+                        onClick={handleConfirmWarning}
+                      />
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Heal Page Layer */}
+              <AnimatePresence>
+                {showHealPage && (
+                  <motion.div
+                    className="heal-layer-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                    style={{ zIndex: 160 }}
+                  >
+                    {/* Layer: Healing Action */}
+                    <div
+                      className="rabbit-img-full"
+                      style={{ position: "relative" }}
+                    >
+                      <img
+                        src={rabbitHeal1}
+                        className="rabbit-img-full"
+                        alt="Heal Base"
+                      />
+
+                      <div className="blood-bar-container">
+                        <img
+                          src={getBloodImg()}
+                          className="blood-bar-img"
+                          alt="Blood Progress"
+                        />
+                      </div>
+
+                      <motion.div
+                        className="syringe-container"
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 115 }}
+                        dragElastic={0}
+                        dragSnapToOrigin={true}
+                        onDragEnd={handleSyringeDragEnd}
+                        whileTap={{ scale: 1, cursor: "grabbing" }}
+                        animate={{ opacity: isHealed ? 0 : 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                        }}
+                      >
+                        <img
+                          src={syringeImg}
+                          className="syringe-img"
+                          alt="Syringe"
+                          draggable="false"
+                        />
+                      </motion.div>
+                    </div>
+
+                    {/* Layer: Success Overlay (Fade In) */}
+                    <AnimatePresence>
+                      {isHealed && (
+                        <motion.div
+                          key="done-layer"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.6, ease: "easeInOut" }}
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            zIndex: 190,
+                          }}
+                        >
+                          <img
+                            src={bgBlood100}
+                            className="rabbit-img-full"
+                            alt="Heal Done"
+                          />
+                          <motion.img
+                            src={nextFactorBtnImg}
+                            className="next-factor-btn-img"
+                            onClick={() => navigate("factor")}
+                            whileHover={{
+                              scale: 1.05,
+                              filter: "brightness(1.1)",
+                            }}
+                            whileTap={{ scale: 1 }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* 3. Adopt Overlay */}
+        {/* Adopt Overlay (Initial State) */}
         <AnimatePresence mode="popLayout">
           {!isAdopted && (
             <motion.div
@@ -164,7 +392,7 @@ const RabbitRoom = () => {
               initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               style={{ zIndex: 200 }}
             >
               <img

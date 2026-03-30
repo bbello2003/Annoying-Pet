@@ -1,0 +1,72 @@
+.factor-container-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500; /* ให้อยู่เหนือหน้า RabbitRoom หลัก */
+  overflow: hidden;
+}
+
+.factor-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* Common style for triggers */
+.folder-trigger {
+  position: absolute;
+  cursor: pointer;
+  /* background-color: rgba(255, 0, 0, 0.2); */ /* เปิดเพื่อเช็คตำแหน่งปุ่มขณะพัฒนา */
+  border-radius: 10px;
+}
+
+/* Positions based on the provided image */
+
+.item-tool {
+  top: 52%;
+  left: 9.5%;
+  width: 11%;
+  height: 15%;
+}
+
+.item-gene {
+  bottom: 14%;
+  left: 21.5%;
+  width: 11%;
+  height: 15%;
+}
+
+.item-stress {
+  top: 16%;
+  right: 25.5%;
+  width: 11%;
+  height: 15%;
+}
+
+.item-env {
+  top: 41%;
+  right: 14.5%;
+  width: 11%;
+  height: 15%;
+}
+
+.item-food {
+  bottom: 18%;
+  right: 24%;
+  width: 11%;
+  height: 15%;
+}
+
+/* Next Button Arrow (Bottom Right) */
+.next-btn-trigger {
+  position: absolute;
+  bottom: 6.5%;
+  right: 8.7%;
+  width: 6.5%;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  border-radius: 50%;
+  /* background-color: rgba(0, 255, 0, 0.2); */ /* เปิดเพื่อเช็คตำแหน่ง */
+}

@@ -20,7 +20,10 @@
 
 .rabbit-bg-layer,
 .rabbit-adopt-overlay,
-.rabbit-window-layer {
+.rabbit-window-layer,
+.played-layer-full,
+.sick-layer-full,
+.heal-layer-full {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -34,6 +37,31 @@
   display: block;
 }
 
+/* UI Elements */
+.rabbit-home-btn {
+  position: absolute;
+  top: 1.7%;
+  left: 1.3%;
+  width: 2vw;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rabbit-home-btn img {
+  width: 100%;
+  display: block;
+}
+
+.rabbit-adopt-btn-pos {
+  position: absolute;
+  bottom: 7.1%;
+  left: 40.75%;
+  width: 16.45%;
+  cursor: pointer;
+}
+
+/* Room Objects */
 .rabbit-cupboard-container {
   position: absolute;
   top: 17%;
@@ -90,6 +118,7 @@
   display: block;
 }
 
+/* Window & Sequences */
 .rabbit-window-container {
   position: absolute;
   top: 32%;
@@ -97,7 +126,7 @@
   width: 9.5%;
   z-index: 110;
   cursor: pointer;
-  transform-origin: center; 
+  transform-origin: center;
 }
 
 .rabbit-window-img {
@@ -115,25 +144,82 @@
   pointer-events: none;
 }
 
-.rabbit-home-btn {
+.next-step-trigger {
   position: absolute;
-  top: 1.7%;
-  left: 1.3%;
-  width: 2vw;
-  background: none;
-  border: none;
+  bottom: 5.5%;
+  left: 40%;
+  width: 19.5%;
+  height: 54.5%;
   cursor: pointer;
+  z-index: 130;
 }
 
-.rabbit-home-btn img {
+/* Modal & Feedback */
+.warning-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.warning-container {
+  position: relative;
+  width: 24%;
+}
+
+.warning-img {
   width: 100%;
+  height: auto;
   display: block;
 }
 
-.rabbit-adopt-btn-pos {
+.warning-confirm-btn {
   position: absolute;
-  bottom: 7.1%;
-  left: 40.75%;
-  width: 16.45%;
+  bottom: 15%;
+  left: 25%;
+  width: 50%;
+  height: 11%;
   cursor: pointer;
+}
+
+/* Heal Mechanics */
+.blood-bar-container {
+  position: absolute;
+  top: 32%;
+  left: 35.5%;
+  width: 28.9%;
+  z-index: 170;
+  pointer-events: none;
+}
+
+.blood-bar-img {
+  width: 100%;
+  height: auto;
+}
+
+.syringe-container {
+  position: absolute;
+  bottom: 12%;
+  left: 11.5%;
+  width: 25%;
+  z-index: 180;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.syringe-img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.next-factor-btn-img {
+  position: absolute;
+  bottom: 3.5%;
+  right: 4.6%;
+  width: 6.5%;
+  cursor: pointer;
+  z-index: 200;
 }
