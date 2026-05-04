@@ -3,22 +3,22 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./HedgehogRoom.css";
 
-import bgAdoptPage from "../../assets/hedgehogRoom/hedgehog-background.png";
-import bgBathroom from "../../assets/hedgehogRoom/bg-bathroom.png";
-import homeIcon from "../../assets/components/home-icon.png";
-import adoptBtnImg from "../../assets/components/adopt-button.png";
-import notiImg from "../../assets/hedgehogRoom/too-high-humidity-warning.png";
-import hedgehogMain from "../../assets/hedgehogRoom/hedgehog.png";
-import cleanHomeBtn from "../../assets/hedgehogRoom/clean-home-button.png";
+import bgAdoptPage from "../../assets/hedgehogRoom/hedgehog-background.webp";
+import bgBathroom from "../../assets/hedgehogRoom/bg-bathroom.webp";
+import homeIcon from "../../assets/components/home-icon.webp";
+import adoptBtnImg from "../../assets/components/adopt-button.webp";
+import notiImg from "../../assets/hedgehogRoom/too-high-humidity-warning.webp";
+import hedgehogMain from "../../assets/hedgehogRoom/hedgehog.webp";
+import cleanHomeBtn from "../../assets/hedgehogRoom/clean-home-button.webp";
 
-import humidity0 from "../../assets/hedgehogRoom/humidity-main.png";
-import humidity10 from "../../assets/hedgehogRoom/humidity-10.png";
-import humidity20 from "../../assets/hedgehogRoom/humidity-20.png";
-import humidity30 from "../../assets/hedgehogRoom/humidity-30.png";
-import humidity40 from "../../assets/hedgehogRoom/humidity-40.png";
-import humidity50 from "../../assets/hedgehogRoom/humidity-50.png";
-import humidity60 from "../../assets/hedgehogRoom/humidity-60.png";
-import humidity70 from "../../assets/hedgehogRoom/humidity-70.png";
+import humidity0 from "../../assets/hedgehogRoom/humidity-main.webp";
+import humidity10 from "../../assets/hedgehogRoom/humidity-10.webp";
+import humidity20 from "../../assets/hedgehogRoom/humidity-20.webp";
+import humidity30 from "../../assets/hedgehogRoom/humidity-30.webp";
+import humidity40 from "../../assets/hedgehogRoom/humidity-40.webp";
+import humidity50 from "../../assets/hedgehogRoom/humidity-50.webp";
+import humidity60 from "../../assets/hedgehogRoom/humidity-60.webp";
+import humidity70 from "../../assets/hedgehogRoom/humidity-70.webp";
 
 const humidityImages: Record<number, string> = {
   0: humidity0,

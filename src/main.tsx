@@ -23,6 +23,9 @@ import SquirrelClean from "./pages/squirrelRoom/SquirrelClean";
 import SecretRoom from "./pages/secretRoom/SecretRoom";
 
 import "./index.css";
+import { preloadAllAssets } from "./preloadAssets";
+
+preloadAllAssets();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

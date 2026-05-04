@@ -4,17 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./SugarGliderRoom.css";
 
 // Import Assets
-import bgImage from "../../assets/sugarGliderRoom/sugarGlider-background.png";
-import topicImage from "../../assets/sugarGliderRoom/sugarGlider-topic.png";
-import homeIcon from "../../assets/components/home-icon.png";
-import adoptBtn from "../../assets/components/adopt-button.png";
-import shadowImage from "../../assets/sugarGliderRoom/sugarGlider-shadow.png";
-import fridgeClose from "../../assets/sugarGliderRoom/fridge-close.png";
-import mainChar from "../../assets/sugarGliderRoom/sugarGlider-main-char.png";
-import tabTopic from "../../assets/sugarGliderRoom/sugarGlider-tab-topic.png";
-import fridgeOpen from "../../assets/sugarGliderRoom/fridge-open.png";
-import hungryOpinion from "../../assets/sugarGliderRoom/hungry-opinion.png";
-import tabBarImage from "../../assets/components/tabbar.png";
+import bgImage from "../../assets/sugarGliderRoom/sugarGlider-background.webp";
+import topicImage from "../../assets/sugarGliderRoom/sugarGlider-topic.webp";
+import homeIcon from "../../assets/components/home-icon.webp";
+import adoptBtn from "../../assets/components/adopt-button.webp";
+import shadowImage from "../../assets/sugarGliderRoom/sugarGlider-shadow.webp";
+import fridgeClose from "../../assets/sugarGliderRoom/fridge-close.webp";
+import mainChar from "../../assets/sugarGliderRoom/sugarGlider-main-char.webp";
+import tabTopic from "../../assets/sugarGliderRoom/sugarGlider-tab-topic.webp";
+import fridgeOpen from "../../assets/sugarGliderRoom/fridge-open.webp";
+import hungryOpinion from "../../assets/sugarGliderRoom/hungry-opinion.webp";
+import tabBarImage from "../../assets/components/tabbar.webp";
 
 const SugarGliderRoom = () => {
   const navigate = useNavigate();

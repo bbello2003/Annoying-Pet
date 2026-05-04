@@ -4,28 +4,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./SugarGliderDining.css";
 
 // Assets
-import diningBg from "../../assets/sugarGliderRoom/sugarGlider-dining-background.png";
-import homeIcon from "../../assets/components/home-icon.png";
-import sugarDefaultImg from "../../assets/sugarGliderRoom/sugar-dining-default.png";
-import sugarAngryImg from "../../assets/sugarGliderRoom/sugar-dining-angry.png";
-import angryOpinionImg from "../../assets/sugarGliderRoom/angry-opinion.png";
-import dirtImg from "../../assets/sugarGliderRoom/dirt.png";
-import plateImg from "../../assets/sugarGliderRoom/plate.png";
-import diningTableImg from "../../assets/sugarGliderRoom/dining-table.png";
-import gameOverWindowImg from "../../assets/sugarGliderRoom/game-over-window.png";
-import retryBtnImg from "../../assets/sugarGliderRoom/retry-button.png";
-import nextBtnImg from "../../assets/sugarGliderRoom/next-button.png";
+import diningBg from "../../assets/sugarGliderRoom/sugarGlider-dining-background.webp";
+import homeIcon from "../../assets/components/home-icon.webp";
+import sugarDefaultImg from "../../assets/sugarGliderRoom/sugar-dining-default.webp";
+import sugarAngryImg from "../../assets/sugarGliderRoom/sugar-dining-angry.webp";
+import angryOpinionImg from "../../assets/sugarGliderRoom/angry-opinion.webp";
+import dirtImg from "../../assets/sugarGliderRoom/dirt.webp";
+import plateImg from "../../assets/sugarGliderRoom/plate.webp";
+import diningTableImg from "../../assets/sugarGliderRoom/dining-table.webp";
+import gameOverWindowImg from "../../assets/sugarGliderRoom/game-over-window.webp";
+import retryBtnImg from "../../assets/sugarGliderRoom/retry-button.webp";
+import nextBtnImg from "../../assets/sugarGliderRoom/next-button.webp";
 
 // Food Assets
-import eggImg from "../../assets/sugarGliderRoom/egg.png";
-import corianderImg from "../../assets/sugarGliderRoom/coriander.png";
-import carrotImg from "../../assets/sugarGliderRoom/carrot.png";
-import blueberryImg from "../../assets/sugarGliderRoom/blueberry.png";
-import tomatoImg from "../../assets/sugarGliderRoom/tomato.png";
-import pelletedFoodImg from "../../assets/sugarGliderRoom/pelleted-food.png";
-import appleImg from "../../assets/sugarGliderRoom/apple.png";
-import insectImg from "../../assets/sugarGliderRoom/insect.png";
-import broccoliImg from "../../assets/sugarGliderRoom/broccoli.png";
+import eggImg from "../../assets/sugarGliderRoom/egg.webp";
+import corianderImg from "../../assets/sugarGliderRoom/coriander.webp";
+import carrotImg from "../../assets/sugarGliderRoom/carrot.webp";
+import blueberryImg from "../../assets/sugarGliderRoom/blueberry.webp";
+import tomatoImg from "../../assets/sugarGliderRoom/tomato.webp";
+import pelletedFoodImg from "../../assets/sugarGliderRoom/pelleted-food.webp";
+import appleImg from "../../assets/sugarGliderRoom/apple.webp";
+import insectImg from "../../assets/sugarGliderRoom/insect.webp";
+import broccoliImg from "../../assets/sugarGliderRoom/broccoli.webp";
 
 const foodMap: { [key: string]: string } = {
   egg: eggImg,
