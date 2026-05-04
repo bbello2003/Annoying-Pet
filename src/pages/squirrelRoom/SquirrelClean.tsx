@@ -5,22 +5,22 @@ import { useNavigate } from "react-router-dom";
 import "./SquirrelClean.css";
 
 import { globalCashAudio } from "../lobbyPage/LobbyPage";
-import cleanBg from "../../assets/squirrelRoom/clean-bg.png";
-import allFixedBg from "../../assets/squirrelRoom/clean-all-fixed-background.png";
-import weightLifting from "../../assets/squirrelRoom/weightlifting.png";
-import weightLiftingMessed from "../../assets/squirrelRoom/weight-lifting-broke.png";
-import shelfDumbell from "../../assets/squirrelRoom/shelf-dumbell-fixed.png";
-import shelfDumbellMessed from "../../assets/squirrelRoom/shelf-dumbell-broke.png";
-import ball from "../../assets/squirrelRoom/ball-fixed.png";
-import ballMessed from "../../assets/squirrelRoom/ball-broke.png";
-import catherBell from "../../assets/squirrelRoom/catherbell-fixed.png";
-import catherBellMessed from "../../assets/squirrelRoom/catherbell-broke.png";
-import dumbbell from "../../assets/squirrelRoom/dumbell-fixed.png";
-import dumbbellMessed from "../../assets/squirrelRoom/dumbell-broke.png";
-import squirrelDef from "../../assets/squirrelRoom/squirrel-default.png";
-import topic1Text from "../../assets/squirrelRoom/clean-topic-text-1.png";
-import topic2Text from "../../assets/squirrelRoom/clean-topic-text-2.png";
-import homeCircleBtn from "../../assets/components/home-circle-button.png";
+import cleanBg from "../../assets/squirrelRoom/clean-bg.webp";
+import allFixedBg from "../../assets/squirrelRoom/clean-all-fixed-background.webp";
+import weightLifting from "../../assets/squirrelRoom/weightlifting.webp";
+import weightLiftingMessed from "../../assets/squirrelRoom/weight-lifting-broke.webp";
+import shelfDumbell from "../../assets/squirrelRoom/shelf-dumbell-fixed.webp";
+import shelfDumbellMessed from "../../assets/squirrelRoom/shelf-dumbell-broke.webp";
+import ball from "../../assets/squirrelRoom/ball-fixed.webp";
+import ballMessed from "../../assets/squirrelRoom/ball-broke.webp";
+import catherBell from "../../assets/squirrelRoom/catherbell-fixed.webp";
+import catherBellMessed from "../../assets/squirrelRoom/catherbell-broke.webp";
+import dumbbell from "../../assets/squirrelRoom/dumbell-fixed.webp";
+import dumbbellMessed from "../../assets/squirrelRoom/dumbell-broke.webp";
+import squirrelDef from "../../assets/squirrelRoom/squirrel-default.webp";
+import topic1Text from "../../assets/squirrelRoom/clean-topic-text-1.webp";
+import topic2Text from "../../assets/squirrelRoom/clean-topic-text-2.webp";
+import homeCircleBtn from "../../assets/components/home-circle-button.webp";
 import cashGif from "../../assets/components/cash-gif.gif";
 
 interface CashEffect {

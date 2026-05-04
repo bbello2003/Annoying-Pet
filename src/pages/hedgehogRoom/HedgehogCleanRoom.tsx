@@ -3,25 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./HedgehogCleanRoom.css";
 
-import homeIcon from "../../assets/components/home-icon.png";
-import homeCircle from "../../assets/components/home-circle-button.png";
+import homeIcon from "../../assets/components/home-icon.webp";
+import homeCircle from "../../assets/components/home-circle-button.webp";
 import hedgehogGif from "../../assets/hedgehogRoom/hedgehog-gif.gif";
 
-import bgClean from "../../assets/hedgehogRoom/bg-clean-room.png";
-import step1 from "../../assets/hedgehogRoom/hedge-step-1.png";
-import step2 from "../../assets/hedgehogRoom/hedge-step-2.png";
-import step3 from "../../assets/hedgehogRoom/hedge-step-3.png";
-import step4 from "../../assets/hedgehogRoom/hedge-step-4.png";
-import step5 from "../../assets/hedgehogRoom/hedge-step-5.png";
-import step6 from "../../assets/hedgehogRoom/hedge-step-6.png";
-import step7 from "../../assets/hedgehogRoom/hedge-step-7.png";
-import step8 from "../../assets/hedgehogRoom/hedge-step-8.png";
-import step9 from "../../assets/hedgehogRoom/hedge-step-9.png";
-import step10 from "../../assets/hedgehogRoom/hedge-step-10.png";
-import step11 from "../../assets/hedgehogRoom/hedge-step-11.png";
-import step12 from "../../assets/hedgehogRoom/hedge-step-12.png";
-import step13 from "../../assets/hedgehogRoom/hedge-step-13.png";
-import step14 from "../../assets/hedgehogRoom/hedge-step-14.png";
+import bgClean from "../../assets/hedgehogRoom/bg-clean-room.webp";
+import step1 from "../../assets/hedgehogRoom/hedge-step-1.webp";
+import step2 from "../../assets/hedgehogRoom/hedge-step-2.webp";
+import step3 from "../../assets/hedgehogRoom/hedge-step-3.webp";
+import step4 from "../../assets/hedgehogRoom/hedge-step-4.webp";
+import step5 from "../../assets/hedgehogRoom/hedge-step-5.webp";
+import step6 from "../../assets/hedgehogRoom/hedge-step-6.webp";
+import step7 from "../../assets/hedgehogRoom/hedge-step-7.webp";
+import step8 from "../../assets/hedgehogRoom/hedge-step-8.webp";
+import step9 from "../../assets/hedgehogRoom/hedge-step-9.webp";
+import step10 from "../../assets/hedgehogRoom/hedge-step-10.webp";
+import step11 from "../../assets/hedgehogRoom/hedge-step-11.webp";
+import step12 from "../../assets/hedgehogRoom/hedge-step-12.webp";
+import step13 from "../../assets/hedgehogRoom/hedge-step-13.webp";
+import step14 from "../../assets/hedgehogRoom/hedge-step-14.webp";
 
 const steps = [
   { img: bgClean, hasButton: false, autoNext: true },

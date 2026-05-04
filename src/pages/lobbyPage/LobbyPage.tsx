@@ -4,20 +4,20 @@ import { useNavigate, Outlet } from "react-router-dom";
 import "./LobbyPage.css";
 
 // Import Assets
-import lobbyBg from "../../assets/lobbyPage/lobby.png";
-import rabbitDef from "../../assets/lobbyPage/rabbit-room-default.png";
-import rabbitAct from "../../assets/lobbyPage/rabbit-room-sick.png";
-import hamsterDef from "../../assets/lobbyPage/hamster-room-default.png";
-import hamsterAct from "../../assets/lobbyPage/hamster-room-playing.png";
-import squirrelDef from "../../assets/lobbyPage/squirrel-room-default.png";
-import squirrelAct from "../../assets/lobbyPage/squirrel-room-exercise.png";
-import hedgehogDef from "../../assets/lobbyPage/hedgehog-room-default.png";
-import hedgehogAct from "../../assets/lobbyPage/hedgehog-room-dirty.png";
-import sugarDef from "../../assets/lobbyPage/sugarGlider-room-default.png";
-import sugarAct from "../../assets/lobbyPage/sugarGlider-room-food.png";
-import secretDef from "../../assets/lobbyPage/secret-room-default.png";
-import secretAct from "../../assets/lobbyPage/secret-room-code.png";
-import exploreTopic from "../../assets/lobbyPage/explore-topic.png";
+import lobbyBg from "../../assets/lobbyPage/lobby.webp";
+import rabbitDef from "../../assets/lobbyPage/rabbit-room-default.webp";
+import rabbitAct from "../../assets/lobbyPage/rabbit-room-sick.webp";
+import hamsterDef from "../../assets/lobbyPage/hamster-room-default.webp";
+import hamsterAct from "../../assets/lobbyPage/hamster-room-playing.webp";
+import squirrelDef from "../../assets/lobbyPage/squirrel-room-default.webp";
+import squirrelAct from "../../assets/lobbyPage/squirrel-room-exercise.webp";
+import hedgehogDef from "../../assets/lobbyPage/hedgehog-room-default.webp";
+import hedgehogAct from "../../assets/lobbyPage/hedgehog-room-dirty.webp";
+import sugarDef from "../../assets/lobbyPage/sugarGlider-room-default.webp";
+import sugarAct from "../../assets/lobbyPage/sugarGlider-room-food.webp";
+import secretDef from "../../assets/lobbyPage/secret-room-default.webp";
+import secretAct from "../../assets/lobbyPage/secret-room-code.webp";
+import exploreTopic from "../../assets/lobbyPage/explore-topic.webp";
 import moneySound from "../../assets/sounds/money-sound-effect.mp3";
 
 export const globalCashAudio = new Audio(moneySound);

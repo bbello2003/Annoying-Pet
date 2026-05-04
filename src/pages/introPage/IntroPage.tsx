@@ -3,28 +3,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./IntroPage.css";
 import StartPage from "../startPage/StartPage.tsx";
 
-import introBg from "../../assets/introPage/intro-background.png";
-import introFirstWindow from "../../assets/introPage/intro-first-window.png";
-import scrollTrack from "../../assets/introPage/scrollbar.png";
-import scrollThumbIcon from "../../assets/introPage/scroll.png";
+import introBg from "../../assets/introPage/intro-background.webp";
+import introFirstWindow from "../../assets/introPage/intro-first-window.webp";
+import scrollTrack from "../../assets/introPage/scrollbar.webp";
+import scrollThumbIcon from "../../assets/introPage/scroll.webp";
 
-import hamsterDef from "../../assets/introPage/hamster-default.png";
-import hamsterAct from "../../assets/introPage/hamster-playing.png";
-import rabbitDef from "../../assets/introPage/rabbit-default.png";
-import rabbitAct from "../../assets/introPage/rabbit-sick.png";
-import squirrelDef from "../../assets/introPage/squirrel-default.png";
-import squirrelAct from "../../assets/introPage/squirrel-exercise.png";
-import sugarDef from "../../assets/introPage/sugarGlider-default.png";
-import sugarAct from "../../assets/introPage/sugarGlider-food.png";
-import hedgeDef from "../../assets/introPage/hedgehog-default.png";
-import hedgeAct from "../../assets/introPage/hedgehog-dirty.png";
+import hamsterDef from "../../assets/introPage/hamster-default.webp";
+import hamsterAct from "../../assets/introPage/hamster-playing.webp";
+import rabbitDef from "../../assets/introPage/rabbit-default.webp";
+import rabbitAct from "../../assets/introPage/rabbit-sick.webp";
+import squirrelDef from "../../assets/introPage/squirrel-default.webp";
+import squirrelAct from "../../assets/introPage/squirrel-exercise.webp";
+import sugarDef from "../../assets/introPage/sugarGlider-default.webp";
+import sugarAct from "../../assets/introPage/sugarGlider-food.webp";
+import hedgeDef from "../../assets/introPage/hedgehog-default.webp";
+import hedgeAct from "../../assets/introPage/hedgehog-dirty.webp";
 
-import alert1 from "../../assets/introPage/alert-window-1.png";
-import alert2 from "../../assets/introPage/alert-window-2.png";
-import alert3 from "../../assets/introPage/alert-window-3.png";
-import alert4 from "../../assets/introPage/alert-window-4.png";
-import alert5 from "../../assets/introPage/alert-window-5.png";
-import alertError from "../../assets/introPage/alert-window-error.png";
+import alert1 from "../../assets/introPage/alert-window-1.webp";
+import alert2 from "../../assets/introPage/alert-window-2.webp";
+import alert3 from "../../assets/introPage/alert-window-3.webp";
+import alert4 from "../../assets/introPage/alert-window-4.webp";
+import alert5 from "../../assets/introPage/alert-window-5.webp";
+import alertError from "../../assets/introPage/alert-window-error.webp";
 
 const ERROR_WINDOWS_CONFIG = [
   {

@@ -4,16 +4,16 @@ import { Outlet, useNavigate } from "react-router-dom";
 import "./SugarGliderFoodStat.css";
 
 // Assets
-import statBg from "../../assets/sugarGliderRoom/sugarGlider-food-stat-background.png";
-import homeIcon from "../../assets/components/home-icon.png";
-import proteinWin from "../../assets/sugarGliderRoom/protein-window.png";
-import fruitWin from "../../assets/sugarGliderRoom/fruit-window.png";
-import vegetableWin from "../../assets/sugarGliderRoom/vegetable-window.png";
-import foodAgeBtn from "../../assets/sugarGliderRoom/food-age-button.png";
-import foodAgeBg from "../../assets/sugarGliderRoom/food-age-background.png";
-import exploreBtn from "../../assets/sugarGliderRoom/explore-button.png";
-import foodAgeWindowImg from "../../assets/sugarGliderRoom/food-age-window.png";
-import nextForbiddenBtn from "../../assets/sugarGliderRoom/next-forbidden-food-button.png";
+import statBg from "../../assets/sugarGliderRoom/sugarGlider-food-stat-background.webp";
+import homeIcon from "../../assets/components/home-icon.webp";
+import proteinWin from "../../assets/sugarGliderRoom/protein-window.webp";
+import fruitWin from "../../assets/sugarGliderRoom/fruit-window.webp";
+import vegetableWin from "../../assets/sugarGliderRoom/vegetable-window.webp";
+import foodAgeBtn from "../../assets/sugarGliderRoom/food-age-button.webp";
+import foodAgeBg from "../../assets/sugarGliderRoom/food-age-background.webp";
+import exploreBtn from "../../assets/sugarGliderRoom/explore-button.webp";
+import foodAgeWindowImg from "../../assets/sugarGliderRoom/food-age-window.webp";
+import nextForbiddenBtn from "../../assets/sugarGliderRoom/next-forbidden-food-button.webp";
 
 const SugarGliderFoodStat = () => {
   const navigate = useNavigate();

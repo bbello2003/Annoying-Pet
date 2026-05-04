@@ -3,27 +3,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Outlet } from "react-router-dom";
 import "./SquirrelBehavior.css";
 
-import behaviorBg from "../../assets/squirrelRoom/behavior-background.png";
-import nextBtn from "../../assets/components/next-arrow.png";
+import behaviorBg from "../../assets/squirrelRoom/behavior-background.webp";
+import nextBtn from "../../assets/components/next-arrow.webp";
 
-import folderDestruction from "../../assets/squirrelRoom/folder-destruction.png";
-import folderSpace from "../../assets/squirrelRoom/folder-space.png";
-import folderNoisy from "../../assets/squirrelRoom/folder-noisy.png";
-import folderNightlife from "../../assets/squirrelRoom/folder-nightlife.png";
+import folderDestruction from "../../assets/squirrelRoom/folder-destruction.webp";
+import folderSpace from "../../assets/squirrelRoom/folder-space.webp";
+import folderNoisy from "../../assets/squirrelRoom/folder-noisy.webp";
+import folderNightlife from "../../assets/squirrelRoom/folder-nightlife.webp";
 
-import popupDestruction from "../../assets/squirrelRoom/popup-destruction.png";
-import popupSpace from "../../assets/squirrelRoom/popup-space.png";
-import popupNoisy from "../../assets/squirrelRoom/popup-noisy.png";
-import popupNightlife from "../../assets/squirrelRoom/popup-nightlife.png";
+import popupDestruction from "../../assets/squirrelRoom/popup-destruction.webp";
+import popupSpace from "../../assets/squirrelRoom/popup-space.webp";
+import popupNoisy from "../../assets/squirrelRoom/popup-noisy.webp";
+import popupNightlife from "../../assets/squirrelRoom/popup-nightlife.webp";
 
-import destSquirrel1 from "../../assets/squirrelRoom/destruction-1.png";
-import destSquirrel2 from "../../assets/squirrelRoom/destruction-2.png";
-import spaceSquirrel1 from "../../assets/squirrelRoom/space-1.png";
-import spaceSquirrel2 from "../../assets/squirrelRoom/space-2.png";
-import noisySquirrel1 from "../../assets/squirrelRoom/noisy-1.png";
-import noisySquirrel2 from "../../assets/squirrelRoom/noisy-2.png";
-import nightSquirrel1 from "../../assets/squirrelRoom/nightlife-1.png";
-import nightSquirrel2 from "../../assets/squirrelRoom/nightlife-2.png";
+import destSquirrel1 from "../../assets/squirrelRoom/destruction-1.webp";
+import destSquirrel2 from "../../assets/squirrelRoom/destruction-2.webp";
+import spaceSquirrel1 from "../../assets/squirrelRoom/space-1.webp";
+import spaceSquirrel2 from "../../assets/squirrelRoom/space-2.webp";
+import noisySquirrel1 from "../../assets/squirrelRoom/noisy-1.webp";
+import noisySquirrel2 from "../../assets/squirrelRoom/noisy-2.webp";
+import nightSquirrel1 from "../../assets/squirrelRoom/nightlife-1.webp";
+import nightSquirrel2 from "../../assets/squirrelRoom/nightlife-2.webp";
 
 const SquirrelBehavior = () => {
   const navigate = useNavigate();

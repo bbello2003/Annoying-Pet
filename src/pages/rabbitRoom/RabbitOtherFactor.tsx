@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitOtherFactor.css";
 
-import bgOtherFactor from "../../assets/rabbitRoom/bg-other-factor.png";
-import nextArrow from "../../assets/components/next-arrow.png";
-import equipmentFolder from "../../assets/rabbitRoom/equipment-folder.png";
-import environmentFolder from "../../assets/rabbitRoom/environment-folder.png";
-import geneticFolder from "../../assets/rabbitRoom/genetic-folder.png";
-import stressFolder from "../../assets/rabbitRoom/stress-folder.png";
-import foodFolder from "../../assets/rabbitRoom/food-folder.png";
-import equipmentWindow from "../../assets/rabbitRoom/equipment-window.png";
-import environmentWindow from "../../assets/rabbitRoom/environment-window.png";
-import geneticWindow from "../../assets/rabbitRoom/genetic-window.png";
-import stressWindow from "../../assets/rabbitRoom/stress-window.png";
-import foodWindow from "../../assets/rabbitRoom/food-window.png";
-import clinicNotice1 from "../../assets/rabbitRoom/clinic-notice-1.png";
-import clinicNotice2 from "../../assets/rabbitRoom/clinic-notice-2.png";
-import clinicNotice3 from "../../assets/rabbitRoom/clinic-notice-3.png";
-import geneticElement from "../../assets/rabbitRoom/genetic-element.png";
-import foodElement1 from "../../assets/rabbitRoom/food-element-1.png";
-import foodElement2 from "../../assets/rabbitRoom/food-element-2.png";
-import foodElement3 from "../../assets/rabbitRoom/food-element-3.png";
-import stressElement1 from "../../assets/rabbitRoom/stress-element-1.png";
-import stressElement2 from "../../assets/rabbitRoom/stress-element-2.png";
+import bgOtherFactor from "../../assets/rabbitRoom/bg-other-factor.webp";
+import nextArrow from "../../assets/components/next-arrow.webp";
+import equipmentFolder from "../../assets/rabbitRoom/equipment-folder.webp";
+import environmentFolder from "../../assets/rabbitRoom/environment-folder.webp";
+import geneticFolder from "../../assets/rabbitRoom/genetic-folder.webp";
+import stressFolder from "../../assets/rabbitRoom/stress-folder.webp";
+import foodFolder from "../../assets/rabbitRoom/food-folder.webp";
+import equipmentWindow from "../../assets/rabbitRoom/equipment-window.webp";
+import environmentWindow from "../../assets/rabbitRoom/environment-window.webp";
+import geneticWindow from "../../assets/rabbitRoom/genetic-window.webp";
+import stressWindow from "../../assets/rabbitRoom/stress-window.webp";
+import foodWindow from "../../assets/rabbitRoom/food-window.webp";
+import clinicNotice1 from "../../assets/rabbitRoom/clinic-notice-1.webp";
+import clinicNotice2 from "../../assets/rabbitRoom/clinic-notice-2.webp";
+import clinicNotice3 from "../../assets/rabbitRoom/clinic-notice-3.webp";
+import geneticElement from "../../assets/rabbitRoom/genetic-element.webp";
+import foodElement1 from "../../assets/rabbitRoom/food-element-1.webp";
+import foodElement2 from "../../assets/rabbitRoom/food-element-2.webp";
+import foodElement3 from "../../assets/rabbitRoom/food-element-3.webp";
+import stressElement1 from "../../assets/rabbitRoom/stress-element-1.webp";
+import stressElement2 from "../../assets/rabbitRoom/stress-element-2.webp";
 
 const RabbitOtherFactor = () => {
   const navigate = useNavigate();
@@ -73,7 +73,12 @@ const RabbitOtherFactor = () => {
     { id: "food", img: foodFolder, window: foodWindow, class: "pos-food" },
   ];
 
-  const closePopup = () => setActivePopup(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const closePopup = () => {
+    if (overlayRef.current) overlayRef.current.style.pointerEvents = "none";
+    setActivePopup(null);
+  };
 
   const getBgColor = () => {
     if (isMapPage) return "#b48b8d";
@@ -215,6 +220,7 @@ const RabbitOtherFactor = () => {
             <AnimatePresence>
               {activePopup && (
                 <motion.div
+                  ref={overlayRef}
                   className="rabbit-popup-overlay"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -251,9 +257,9 @@ const RabbitOtherFactor = () => {
                       <motion.div
                         key="pos1"
                         className="final-popup pos-1"
-                        initial={{ scale: 0, opacity: 0, y: 50 }}
-                        animate={{ scale: 1, opacity: 1, y: 0 }}
-                        exit={{ scale: 0, opacity: 0, y: 20 }}
+                        initial={{ scale: 0, opacity: 0, y: 50, pointerEvents: "none" }}
+                        animate={{ scale: 1, opacity: 1, y: 0, pointerEvents: "auto" }}
+                        exit={{ scale: 0, opacity: 0, y: 20, pointerEvents: "none" }}
                         transition={{ delay: popupStatus.pos1.delay }}
                       >
                         <img
@@ -278,9 +284,9 @@ const RabbitOtherFactor = () => {
                       <motion.div
                         key="pos2"
                         className="final-popup pos-2"
-                        initial={{ scale: 0, opacity: 0, x: -50 }}
-                        animate={{ scale: 1, opacity: 1, x: 0 }}
-                        exit={{ scale: 0, opacity: 0, x: -20 }}
+                        initial={{ scale: 0, opacity: 0, x: -50, pointerEvents: "none" }}
+                        animate={{ scale: 1, opacity: 1, x: 0, pointerEvents: "auto" }}
+                        exit={{ scale: 0, opacity: 0, x: -20, pointerEvents: "none" }}
                         transition={{ delay: popupStatus.pos2.delay }}
                       >
                         <img
@@ -305,9 +311,9 @@ const RabbitOtherFactor = () => {
                       <motion.div
                         key="pos3"
                         className="final-popup pos-3"
-                        initial={{ scale: 0, opacity: 0, y: 50 }}
-                        animate={{ scale: 1, opacity: 1, y: 0 }}
-                        exit={{ scale: 0, opacity: 0, y: 20 }}
+                        initial={{ scale: 0, opacity: 0, y: 50, pointerEvents: "none" }}
+                        animate={{ scale: 1, opacity: 1, y: 0, pointerEvents: "auto" }}
+                        exit={{ scale: 0, opacity: 0, y: 20, pointerEvents: "none" }}
                         transition={{ delay: popupStatus.pos3.delay }}
                       >
                         <img

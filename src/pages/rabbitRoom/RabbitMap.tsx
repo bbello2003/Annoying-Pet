@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitMap.css";
 
-import bgMapFrame from "../../assets/rabbitRoom/bg-map.png";
-import mapDefault from "../../assets/rabbitRoom/map-default.png";
-import mapHospital from "../../assets/rabbitRoom/map-hospital.png";
-import mapExotic from "../../assets/rabbitRoom/map-exotic-hospital.png";
-import bgRabbitEnd from "../../assets/rabbitRoom/bg-rabbit-end.png";
-import nextArrow from "../../assets/components/next-arrow.png";
-import homeCircle from "../../assets/components/home-circle-button.png";
+import bgMapFrame from "../../assets/rabbitRoom/bg-map.webp";
+import mapDefault from "../../assets/rabbitRoom/map-default.webp";
+import mapHospital from "../../assets/rabbitRoom/map-hospital.webp";
+import mapExotic from "../../assets/rabbitRoom/map-exotic-hospital.webp";
+import bgRabbitEnd from "../../assets/rabbitRoom/bg-rabbit-end.webp";
+import nextArrow from "../../assets/components/next-arrow.webp";
+import homeCircle from "../../assets/components/home-circle-button.webp";
 
 const RabbitMap = () => {
   const navigate = useNavigate();

@@ -3,27 +3,27 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./SquirrelRoom.css";
 
-import bgFirstPage from "../../assets/squirrelRoom/squirrel-background.png";
-import bgMainPage from "../../assets/squirrelRoom/squirrel-second-background.png";
-import adoptBtn from "../../assets/components/adopt-button.png";
-import homeIcon from "../../assets/components/home-icon.png";
-import squirrelDef from "../../assets/squirrelRoom/squirrel-default.png";
-import squirrelSmi from "../../assets/squirrelRoom/squirrel-smile.png";
-import squirrelAng from "../../assets/squirrelRoom/squirrel-angry.png";
-import weightLifting from "../../assets/squirrelRoom/weightlifting.png";
-import clickIcon from "../../assets/components/click-icon.png";
-import happyOpinion from "../../assets/squirrelRoom/today-happy-opinion.png";
+import bgFirstPage from "../../assets/squirrelRoom/squirrel-background.webp";
+import bgMainPage from "../../assets/squirrelRoom/squirrel-second-background.webp";
+import adoptBtn from "../../assets/components/adopt-button.webp";
+import homeIcon from "../../assets/components/home-icon.webp";
+import squirrelDef from "../../assets/squirrelRoom/squirrel-default.webp";
+import squirrelSmi from "../../assets/squirrelRoom/squirrel-smile.webp";
+import squirrelAng from "../../assets/squirrelRoom/squirrel-angry.webp";
+import weightLifting from "../../assets/squirrelRoom/weightlifting.webp";
+import clickIcon from "../../assets/components/click-icon.webp";
+import happyOpinion from "../../assets/squirrelRoom/today-happy-opinion.webp";
 
-import tailTopic from "../../assets/squirrelRoom/tail-topic-text.png";
-import tailAngOp from "../../assets/squirrelRoom/dont-touch-tail-opinion.png";
-import bellyTopic from "../../assets/squirrelRoom/belly-topic-text.png";
-import bellyAngOp from "../../assets/squirrelRoom/dont-touch-belly-opinion.png";
-import upsetTopic from "../../assets/squirrelRoom/upset-topic-text.png";
-import headAngOp from "../../assets/squirrelRoom/dont-play-head-opinion.png";
-import nextBtn from "../../assets/squirrelRoom/instinct-next-button.png";
-import instinctTopicText from "../../assets/squirrelRoom/instinct-topic-text.png";
-import instinctWindow from "../../assets/squirrelRoom/instinct-window.png";
-import behaviorNextBtn from "../../assets/squirrelRoom/behavior-next-button.png";
+import tailTopic from "../../assets/squirrelRoom/tail-topic-text.webp";
+import tailAngOp from "../../assets/squirrelRoom/dont-touch-tail-opinion.webp";
+import bellyTopic from "../../assets/squirrelRoom/belly-topic-text.webp";
+import bellyAngOp from "../../assets/squirrelRoom/dont-touch-belly-opinion.webp";
+import upsetTopic from "../../assets/squirrelRoom/upset-topic-text.webp";
+import headAngOp from "../../assets/squirrelRoom/dont-play-head-opinion.webp";
+import nextBtn from "../../assets/squirrelRoom/instinct-next-button.webp";
+import instinctTopicText from "../../assets/squirrelRoom/instinct-topic-text.webp";
+import instinctWindow from "../../assets/squirrelRoom/instinct-window.webp";
+import behaviorNextBtn from "../../assets/squirrelRoom/behavior-next-button.webp";
 
 const SquirrelRoom = () => {
   const navigate = useNavigate();

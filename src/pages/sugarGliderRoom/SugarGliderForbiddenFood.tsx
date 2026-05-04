@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./SugarGliderForbiddenFood.css";
 
-import forbiddenBg from "../../assets/sugarGliderRoom/forbidden-food-background.png";
-import summaryBg from "../../assets/sugarGliderRoom/forbidden-food-summary.png";
-import nextArrowIcon from "../../assets/components/next-arrow.png";
-import homeCircleBtn from "../../assets/components/home-circle-button.png";
-import poisonOverlay from "../../assets/sugarGliderRoom/poison-overlay.png";
-import sugarOverlay from "../../assets/sugarGliderRoom/sugar-overlay.png";
-import digestOverlay from "../../assets/sugarGliderRoom/digest-overlay.png";
+import forbiddenBg from "../../assets/sugarGliderRoom/forbidden-food-background.webp";
+import summaryBg from "../../assets/sugarGliderRoom/forbidden-food-summary.webp";
+import nextArrowIcon from "../../assets/components/next-arrow.webp";
+import homeCircleBtn from "../../assets/components/home-circle-button.webp";
+import poisonOverlay from "../../assets/sugarGliderRoom/poison-overlay.webp";
+import sugarOverlay from "../../assets/sugarGliderRoom/sugar-overlay.webp";
+import digestOverlay from "../../assets/sugarGliderRoom/digest-overlay.webp";
 
 const SugarGliderForbiddenFood = () => {
   const navigate = useNavigate();

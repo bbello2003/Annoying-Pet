@@ -4,24 +4,24 @@ import "./StartPage.css";
 import LobbyPage from "../lobbyPage/LobbyPage";
 
 // Import Assets
-import startBg from "../../assets/startPage/start-background.png";
-import nextArrow from "../../assets/components/next-arrow.png";
-import poleImg from "../../assets/startPage/pole.png";
-import houseImg from "../../assets/startPage/house.png";
+import startBg from "../../assets/startPage/start-background.webp";
+import nextArrow from "../../assets/components/next-arrow.webp";
+import poleImg from "../../assets/startPage/pole.webp";
+import houseImg from "../../assets/startPage/house.webp";
 
 // Import Sign Images
-import medicalSign from "../../assets/startPage/medical-sign.png";
-import foodSign from "../../assets/startPage/food-sign.png";
-import equipSign from "../../assets/startPage/equipment-sign.png";
-import othersSign from "../../assets/startPage/others-sign.png";
-import exploreSignPole from "../../assets/startPage/explore-house-sign.png";
-import exploreSign from "../../assets/startPage/explore-sign.png";
+import medicalSign from "../../assets/startPage/medical-sign.webp";
+import foodSign from "../../assets/startPage/food-sign.webp";
+import equipSign from "../../assets/startPage/equipment-sign.webp";
+import othersSign from "../../assets/startPage/others-sign.webp";
+import exploreSignPole from "../../assets/startPage/explore-house-sign.webp";
+import exploreSign from "../../assets/startPage/explore-sign.webp";
 
 // Import Window Images
-import medicalWin from "../../assets/startPage/medical-window.png";
-import foodWin from "../../assets/startPage/food-window.png";
-import equipWin from "../../assets/startPage/equipment-window.png";
-import othersWin from "../../assets/startPage/others-window.png";
+import medicalWin from "../../assets/startPage/medical-window.webp";
+import foodWin from "../../assets/startPage/food-window.webp";
+import equipWin from "../../assets/startPage/equipment-window.webp";
+import othersWin from "../../assets/startPage/others-window.webp";
 
 const StartPage = () => {
   const [isLobbyMode, setIsLobbyMode] = useState(false);

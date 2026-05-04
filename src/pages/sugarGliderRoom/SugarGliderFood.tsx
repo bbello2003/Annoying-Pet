@@ -3,19 +3,19 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./SugarGliderFood.css";
 
-import fridgeBg from "../../assets/sugarGliderRoom/sugarGlider-fridge-background.png";
-import homeIcon from "../../assets/components/home-icon.png";
-import serveIcon from "../../assets/sugarGliderRoom/serve-button.png";
+import fridgeBg from "../../assets/sugarGliderRoom/sugarGlider-fridge-background.webp";
+import homeIcon from "../../assets/components/home-icon.webp";
+import serveIcon from "../../assets/sugarGliderRoom/serve-button.webp";
 
-import eggImg from "../../assets/sugarGliderRoom/egg.png";
-import corianderImg from "../../assets/sugarGliderRoom/coriander.png";
-import carrotImg from "../../assets/sugarGliderRoom/carrot.png";
-import blueberryImg from "../../assets/sugarGliderRoom/blueberry.png";
-import tomatoImg from "../../assets/sugarGliderRoom/tomato.png";
-import pelletedFoodImg from "../../assets/sugarGliderRoom/pelleted-food.png";
-import appleImg from "../../assets/sugarGliderRoom/apple.png";
-import insectImg from "../../assets/sugarGliderRoom/insect.png";
-import broccoliImg from "../../assets/sugarGliderRoom/broccoli.png";
+import eggImg from "../../assets/sugarGliderRoom/egg.webp";
+import corianderImg from "../../assets/sugarGliderRoom/coriander.webp";
+import carrotImg from "../../assets/sugarGliderRoom/carrot.webp";
+import blueberryImg from "../../assets/sugarGliderRoom/blueberry.webp";
+import tomatoImg from "../../assets/sugarGliderRoom/tomato.webp";
+import pelletedFoodImg from "../../assets/sugarGliderRoom/pelleted-food.webp";
+import appleImg from "../../assets/sugarGliderRoom/apple.webp";
+import insectImg from "../../assets/sugarGliderRoom/insect.webp";
+import broccoliImg from "../../assets/sugarGliderRoom/broccoli.webp";
 
 interface FoodStyle {
   width: string;

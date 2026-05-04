@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { useNavigate, Outlet } from "react-router-dom";
 import "./SquirrelSwitch.css";
 
-import lightOnBg from "../../assets/squirrelRoom/light-on-bg.png";
-import lightOffBg from "../../assets/squirrelRoom/light-off-bg.png";
-import sfxKukKak from "../../assets/squirrelRoom/sfx-kuk-kak.png";
-import sfxKungKang from "../../assets/squirrelRoom/sfx-kung-kang.png";
-import sfxKokKaek from "../../assets/squirrelRoom/sfx-kok-kaek.png";
-import sfxKhrom from "../../assets/squirrelRoom/sfx-khrom.png";
+import lightOnBg from "../../assets/squirrelRoom/light-on-bg.webp";
+import lightOffBg from "../../assets/squirrelRoom/light-off-bg.webp";
+import sfxKukKak from "../../assets/squirrelRoom/sfx-kuk-kak.webp";
+import sfxKungKang from "../../assets/squirrelRoom/sfx-kung-kang.webp";
+import sfxKokKaek from "../../assets/squirrelRoom/sfx-kok-kaek.webp";
+import sfxKhrom from "../../assets/squirrelRoom/sfx-khrom.webp";
 
 const SquirrelSwitch = () => {
   const navigate = useNavigate();

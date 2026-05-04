@@ -1,31 +1,31 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./RabbitRoom.css";
 
 import { globalCashAudio } from "../lobbyPage/LobbyPage"; 
-import homeIcon from "../../assets/components/home-icon.png";
-import adoptBtnImg from "../../assets/components/adopt-button.png";
-import clickIcon from "../../assets/components/click-icon.png";
-import bgAdoptPage from "../../assets/rabbitRoom/rabbit-background.png";
-import bgMain from "../../assets/rabbitRoom/bg-main.png";
-import bgWindow from "../../assets/rabbitRoom/bg-window.png";
-import bgRabbitPlayed from "../../assets/rabbitRoom/bg-rabbit-played.png";
-import bgRabbitSick from "../../assets/rabbitRoom/bg-rabbit-sick.png";
-import bgBlood100 from "../../assets/rabbitRoom/bg-blood-100.png";
-import rabbitMain from "../../assets/rabbitRoom/rabbit.png";
-import cupboardClose from "../../assets/rabbitRoom/cupboard-close.png";
-import cupboardOpen from "../../assets/rabbitRoom/cupboard-open.png";
-import topicMain from "../../assets/rabbitRoom/topic-main.png";
-import windowImg from "../../assets/rabbitRoom/window.png";
-import warningWindow from "../../assets/rabbitRoom/warning-window.png";
-import rabbitHeal1 from "../../assets/rabbitRoom/rabbit-heal-1.png";
-import syringeImg from "../../assets/rabbitRoom/syringe.png";
-import nextFactorBtnImg from "../../assets/rabbitRoom/next-factor-button.png";
-import blood20 from "../../assets/rabbitRoom/blood-20.png";
-import blood40 from "../../assets/rabbitRoom/blood-40.png";
-import blood60 from "../../assets/rabbitRoom/blood-60.png";
-import blood80 from "../../assets/rabbitRoom/blood-80.png";
+import homeIcon from "../../assets/components/home-icon.webp";
+import adoptBtnImg from "../../assets/components/adopt-button.webp";
+import clickIcon from "../../assets/components/click-icon.webp";
+import bgAdoptPage from "../../assets/rabbitRoom/rabbit-background.webp";
+import bgMain from "../../assets/rabbitRoom/bg-main.webp";
+import bgWindow from "../../assets/rabbitRoom/bg-window.webp";
+import bgRabbitPlayed from "../../assets/rabbitRoom/bg-rabbit-played.webp";
+import bgRabbitSick from "../../assets/rabbitRoom/bg-rabbit-sick.webp";
+import bgBlood100 from "../../assets/rabbitRoom/bg-blood-100.webp";
+import rabbitMain from "../../assets/rabbitRoom/rabbit.webp";
+import cupboardClose from "../../assets/rabbitRoom/cupboard-close.webp";
+import cupboardOpen from "../../assets/rabbitRoom/cupboard-open.webp";
+import topicMain from "../../assets/rabbitRoom/topic-main.webp";
+import windowImg from "../../assets/rabbitRoom/window.webp";
+import warningWindow from "../../assets/rabbitRoom/warning-window.webp";
+import rabbitHeal1 from "../../assets/rabbitRoom/rabbit-heal-1.webp";
+import syringeImg from "../../assets/rabbitRoom/syringe.webp";
+import nextFactorBtnImg from "../../assets/rabbitRoom/next-factor-button.webp";
+import blood20 from "../../assets/rabbitRoom/blood-20.webp";
+import blood40 from "../../assets/rabbitRoom/blood-40.webp";
+import blood60 from "../../assets/rabbitRoom/blood-60.webp";
+import blood80 from "../../assets/rabbitRoom/blood-80.webp";
 import cashGif from "../../assets/components/cash-gif.gif";
 
 interface CashEffect {
@@ -36,6 +36,19 @@ interface CashEffect {
 
 const RabbitRoom = () => {
   const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const syringeDragLimit = Math.round(containerWidth * 0.16);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setContainerWidth(entry.contentRect.width);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const [isAdopted, setIsAdopted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -106,7 +119,7 @@ const RabbitRoom = () => {
   };
 
   const handleSyringeDragEnd = (_: any, info: any) => {
-    if (info.offset.x >= 115 && bloodLevel < 100) {
+    if (info.offset.x >= syringeDragLimit && bloodLevel < 100) {
       spawnCashAtSyringe(info);
       setBloodLevel((prev) => {
         if (prev === 20) return 40;
@@ -134,7 +147,7 @@ const RabbitRoom = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <div className="rabbit-responsive-container">
+      <div className="rabbit-responsive-container" ref={containerRef}>
         <motion.button
           className="rabbit-home-btn"
           onClick={() => navigate("/lobby")}
@@ -356,7 +369,7 @@ const RabbitRoom = () => {
                       <motion.div
                         className="syringe-container"
                         drag="x"
-                        dragConstraints={{ left: 0, right: 115 }}
+                        dragConstraints={{ left: 0, right: syringeDragLimit }}
                         dragElastic={0}
                         dragSnapToOrigin={true}
                         onDragEnd={handleSyringeDragEnd}
