@@ -191,6 +191,7 @@
 .final-btn-snooze {
   position: absolute;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .pos-1 .final-btn-snooze {
