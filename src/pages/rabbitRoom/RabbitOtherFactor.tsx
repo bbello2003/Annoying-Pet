@@ -111,7 +111,7 @@ const RabbitOtherFactor = () => {
         ...prev,
         [pos]: { ...prev[pos], visible: true },
       }));
-    }, 300);
+    }, 450);
   };
 
   const renderSpecialContent = () => {

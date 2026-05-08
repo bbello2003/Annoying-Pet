@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import "./SecretRoom.css";
 
 import bgSecret from "../../assets/secretRoom/bg-secret.webp";
@@ -32,6 +32,7 @@ const SecretRoom = () => {
   const { scrollYProgress } = useScroll({ container: viewportRef });
 
   const [triggered, setTriggered] = useState<Record<string, boolean>>({});
+  const triggeredRef = useRef<Record<string, boolean>>({});
   const [isEnded, setIsEnded] = useState(false);
   const [showRestart, setShowRestart] = useState(false);
 
@@ -40,30 +41,29 @@ const SecretRoom = () => {
     navigate("/");
   };
 
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      const checkTrigger = (id: string, threshold: number) => {
-        if (latest > threshold && !triggered[id]) {
-          setTriggered((prev) => ({ ...prev, [id]: true }));
-        }
-      };
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const checkTrigger = (id: string, threshold: number) => {
+      if (latest > threshold && !triggeredRef.current[id]) {
+        triggeredRef.current[id] = true;
+        setTriggered((prev) => ({ ...prev, [id]: true }));
+      }
+    };
 
-      checkTrigger("topic", 0.05);
-      checkTrigger("w1", 0.15);
-      checkTrigger("w2", 0.22);
-      checkTrigger("w3", 0.3);
-      checkTrigger("w4", 0.38);
-      checkTrigger("w5", 0.45);
-      checkTrigger("w6", 0.52);
-      checkTrigger("w7", 0.6);
-      checkTrigger("w8", 0.68);
-      checkTrigger("w9", 0.75);
-      checkTrigger("w10", 0.82);
-      checkTrigger("w11", 0.88);
-      checkTrigger("w12", 0.92);
-      checkTrigger("next", 0.96);
-    });
-  }, [scrollYProgress, triggered]);
+    checkTrigger("topic", 0.05);
+    checkTrigger("w1", 0.15);
+    checkTrigger("w2", 0.22);
+    checkTrigger("w3", 0.3);
+    checkTrigger("w4", 0.38);
+    checkTrigger("w5", 0.45);
+    checkTrigger("w6", 0.52);
+    checkTrigger("w7", 0.6);
+    checkTrigger("w8", 0.68);
+    checkTrigger("w9", 0.75);
+    checkTrigger("w10", 0.82);
+    checkTrigger("w11", 0.88);
+    checkTrigger("w12", 0.92);
+    checkTrigger("next", 0.96);
+  });
 
   return (
     <motion.div
