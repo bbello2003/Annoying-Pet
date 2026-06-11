@@ -79,15 +79,18 @@ const LobbyPage = () => {
   const [hoveredRoom, setHoveredRoom] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const completedRooms = [
-    localStorage.getItem("rabbit_completed"),
-    localStorage.getItem("hamster_completed"),
-    localStorage.getItem("hedgehog_completed"),
-    localStorage.getItem("sugar_completed"),
-    localStorage.getItem("squirrel_completed"),
-  ];
+  // --- Secret Room Unlock Condition ---
+  // const completedRooms = [
+  //   localStorage.getItem("rabbit_completed"),
+  //   localStorage.getItem("hamster_completed"),
+  //   localStorage.getItem("hedgehog_completed"),
+  //   localStorage.getItem("sugar_completed"),
+  //   localStorage.getItem("squirrel_completed"),
+  // ];
+  // const isAllCompleted = completedRooms.every((room) => room === "true");
 
-  const isAllCompleted = completedRooms.every((room) => room === "true");
+  // --- Secret Room Unlock Condition: Bypass condition to force unlock ---
+  const isAllCompleted = true;
 
   const handleRoomClick = (id: string) => {
     if (id === "secret" && !isAllCompleted) return;
